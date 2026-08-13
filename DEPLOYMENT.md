@@ -1,14 +1,26 @@
-# 🚀 Hướng Dẫn Deploy & Cấu Hình CI/CD cho Dự Án Dược Liệu Học
+# 🚀 Hướng Dẫn Deploy & Cấu Hình CI/CD (Vercel + Hugging Face Spaces)
 
-Dự án đã được cấu hình linh hoạt hỗ trợ cả **Deploy Tách Rời (Frontend SPA + Backend API)** lẫn **Deploy Gộp Monolith (Docker Fullstack)**.
+Dự án hỗ trợ kiến trúc phân tách hiện đại:
+- **Frontend SPA**: Deploy lên **Vercel** (CDN toàn cầu, tốc độ cao, hoàn toàn miễn phí).
+- **Backend API (Node.js/Express + Gemini AI)**: Deploy lên **Hugging Face Spaces** (Docker SDK miễn phí, chạy 24/7, bảo mật API Key tuyệt đối).
+- **CI/CD Quality Gate**: Tự động hóa qua **GitHub Actions** (`.github/workflows/`).
 
 ---
 
-## 📂 Cấu Trúc Dự Án Tách Rời
+## 📂 Kiến Trúc Hệ Thống
 
-- **Frontend**: React + Vite + Tailwind CSS (Nằm ở `/src`).
-- **Backend API**: Express + `@google/genai` (Nằm ở `/server`).
-- **API Helper**: `/src/config/api.ts` tự động điều hướng API URL thông qua biến môi trường `VITE_API_BASE_URL`.
+```text
+[Trình duyệt / Người dùng]
+          │
+          ▼
+[Frontend: Vercel (React Vite SPA)]  <--- Vercel CDN
+          │
+          ▼ (HTTPS API Call)
+[Backend: Hugging Face Spaces (Docker Node.js)] <--- Port 7860
+          │
+          ▼ (Internal Proxy)
+[Google Gemini 3.6 Flash API] <--- GEMINI_API_KEY được bảo mật
+```
 
 ---
 
@@ -24,79 +36,79 @@ Dự án đã được cấu hình linh hoạt hỗ trợ cả **Deploy Tách R�
 | `npm run start:backend` | Khởi chạy Standalone Backend production |
 | `npm run build` | Build gộp cả Frontend & Backend Monolith |
 | `npm run start` | Khởi chạy Monolith Server production |
+| `npm run lint` | Kiểm tra lỗi kiểu TypeScript (`tsc --noEmit`) |
 
 ---
 
-## 🌐 LỰA CHỌN 1: Deploy Tách Rời Frontend & Backend (Khuyên Dùng)
+## 🌐 HƯỚNG DẪN TRIỂN KHAI CHI TIẾT
 
-### Step 1: Deploy Backend API (Render / Railway / Cloud Run / Fly.io)
+### Bước 1: Deploy Backend lên Hugging Face Spaces
 
-1. Tải code lên kho chứa GitHub.
-2. Tạo Service mới trên **Render** / **Railway**:
-   - **Environment**: Node.js
-   - **Build Command**: `npm install && npm run build:backend`
-   - **Start Command**: `npm run start:backend`
-3. Cấu hình các **Environment Variables**:
-   - `GEMINI_API_KEY`: Key Gemini API của bạn từ Google AI Studio.
-   - `ALLOWED_ORIGINS`: Domain Frontend của bạn (Ví dụ: `https://ten-app-cua-ban.vercel.app` hoặc `*`).
-   - `PORT`: Default `5000` (hoặc cổng do hosting tự cấp).
-4. Sau khi deploy xong, bạn sẽ thu được **Backend URL** (Ví dụ: `https://duoclieu-backend.onrender.com`).
-
----
-
-### Step 2: Deploy Frontend SPA (Vercel / Netlify / GitHub Pages)
-
-#### A. Deploy lên Vercel / Netlify:
-1. Kết nối kho lưu trữ GitHub vào **Vercel** hoặc **Netlify**.
-2. **Framework Preset**: Vite.
-3. **Build Command**: `npm run build:frontend`
-4. **Output Directory**: `dist`
-5. Thêm biến môi trường (**Environment Variables**):
-   - `VITE_API_BASE_URL`: Đặt bằng URL Backend ở Step 1 (Ví dụ: `https://duoclieu-backend.onrender.com`).
-
-#### B. Deploy tự động lên GitHub Pages (Qua CI/CD Workflow):
-- Dự án đã tích hợp sẵn File `.github/workflows/deploy-frontend.yml`.
-- Vào repository trên GitHub -> **Settings** -> **Pages** -> Chọn **Source: GitHub Actions**.
-- Trong **Settings** -> **Secrets and variables** -> **Actions**, thêm secret:
-  - `VITE_API_BASE_URL`: URL API Backend của bạn.
+1. Đăng nhập vào [Hugging Face](https://huggingface.co/) và bấm **New Space**.
+2. Thiết lập thông số:
+   - **Space name**: Ví dụ `pharma-study-backend`
+   - **License**: `mit` hoặc `apache-2.0`
+   - **Space SDK**: Chọn **Docker** -> Chọn **Blank**
+   - **Space Hardware**: Chọn **Free (CPU basic · 2 vCPU · 16 GB · Free)**
+   - **Privacy**: `Public` (để Frontend từ Vercel có thể gọi API)
+3. Sau khi tạo Space, vào **Settings** -> **Variables and secrets**:
+   - Thêm Secret `GEMINI_API_KEY`: Điền API key từ Google AI Studio.
+   - Thêm Variable `ALLOWED_ORIGINS`: Điền `*` hoặc domain Vercel của bạn.
+4. Lấy **Direct URL của Space**:
+   - URL có dạng: `https://<username>-<space-name>.hf.space` (Ví dụ: `https://kisukabe-pharma-study-backend.hf.space`).
+   - Kiểm tra bằng cách truy cập: `https://<your-space>.hf.space/api/health` -> Nhận được `{"status":"ok"}` là thành công.
 
 ---
 
-## 🐳 LỰA CHỌN 2: Deploy Bằng Docker / Docker Compose
+### Bước 2: Deploy Frontend lên Vercel
 
-### 1. Chạy Cả Frontend & Backend độc lập với Docker Compose (Local/VPS):
+1. Đăng nhập vào [Vercel](https://vercel.com/) và bấm **Add New...** -> **Project**.
+2. Import repository GitHub của bạn.
+3. Thiết lập Build & Output:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build:frontend`
+   - **Output Directory**: `dist`
+4. Cấu hình **Environment Variables**:
+   - `VITE_API_BASE_URL`: Điền URL Backend Hugging Face ở Bước 1 (Ví dụ: `https://kisukabe-pharma-study-backend.hf.space`).
+5. Bấm **Deploy**. Sau 1-2 phút, Frontend đã live trực tuyến!
+
+---
+
+## 🔄 Tự Động Hóa CI/CD (GitHub Actions)
+
+Dự án đã tích hợp sẵn 3 workflows trong `.github/workflows/`:
+
+1. **`ci.yml` (Continuous Integration & Quality Gate)**:
+   - Tự động chạy mỗi khi có `push` hoặc `pull_request` vào nhánh `main`.
+   - Chạy kiểm tra TypeScript (`tsc --noEmit`), build thử Frontend, Backend độc lập và Monolith.
+
+2. **`deploy-frontend.yml` (CD Vercel)**:
+   - Tự động trigger build và deploy Frontend lên Vercel khi có commit mới.
+   - Yêu cầu cấu hình GitHub Secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `VITE_API_BASE_URL`.
+
+3. **`deploy-backend-hf.yml` (CD Hugging Face Spaces)**:
+   - Tự động đồng bộ code Backend lên Hugging Face Space repository.
+   - Yêu cầu cấu hình GitHub Secrets: `HF_TOKEN` (lấy tại `huggingface.co/settings/tokens`), `HF_SPACE_REPO` (dạng `username/space-name`).
+
+---
+
+## 🐳 Triển Khai Local / VPS Bằng Docker Compose
+
+Nếu muốn chạy toàn bộ trên máy cá nhân hoặc VPS riêng:
+
 ```bash
-# Tạo file .env và đặt GEMINI_API_KEY
+# 1. Tạo file .env và cấu hình GEMINI_API_KEY
 echo "GEMINI_API_KEY=your_gemini_api_key" > .env
 
-# Khởi chạy 2 container
+# 2. Khởi chạy 2 container độc lập
 docker-compose up -d --build
 ```
 - Frontend: `http://localhost:8080`
 - Backend API: `http://localhost:5000`
-
-### 2. Build Docker Monolith Single Container:
-```bash
-docker build -t duoclieu-app .
-docker run -d -p 3000:3000 -e GEMINI_API_KEY="your_api_key" duoclieu-app
-```
-
----
-
-## 🔄 Quy Trình CI/CD Tự Động (GitHub Actions)
-
-Dự án bao gồm 3 file workflow CI/CD trong thư mục `.github/workflows/`:
-
-1. **`ci.yml`**:
-   - Tự động chạy khi có Push / Pull Request vào nhánh `main` / `master`.
-   - Kiểm tra Typecheck (TypeScript linting), kiểm tra build độc lập Frontend, Backend và Monolith.
-2. **`deploy-frontend.yml`**:
-   - Tự động Build Frontend SPA & Deploy trực tiếp lên **GitHub Pages** khi push code mới.
-3. **`deploy-backend.yml`**:
-   - Kiểm tra khả năng đóng gói Docker Container cho Backend.
+- API Health: `http://localhost:5000/api/health`
 
 ---
 
 ## 🔐 Bảo Mật API Key
-- `GEMINI_API_KEY` luôn nằm trên Server/Backend, tuyệt đối không lộ ở phía Client/Browser.
-- Mọi cuộc gọi AI từ Frontend đều thông qua Proxy `/api/chat` giúp bảo mật hoàn toàn API Key.
+- `GEMINI_API_KEY` luôn được giữ an toàn phía Backend/Server (trên Hugging Face Space Secret), tuyệt đối không bao giờ được lộ ra mã nguồn trình duyệt Client.
+- Mọi tương tác AI đều được proxy an toàn qua endpoint `/api/chat` và `/api/generate-cards`.
