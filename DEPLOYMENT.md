@@ -1,8 +1,8 @@
-# 🚀 Hướng Dẫn Deploy & Cấu Hình CI/CD (Vercel + Hugging Face Spaces)
+# 🚀 Hướng Dẫn Deploy & Cấu Hình CI/CD (Vercel + Render.com)
 
-Dự án hỗ trợ kiến trúc phân tách hiện đại:
+Dự án hỗ trợ kiến trúc phân tách hiện đại (100% Miễn phí, không cần thẻ tín dụng):
 - **Frontend SPA**: Deploy lên **Vercel** (CDN toàn cầu, tốc độ cao, hoàn toàn miễn phí).
-- **Backend API (Node.js/Express + Gemini AI)**: Deploy lên **Hugging Face Spaces** (Docker SDK miễn phí, chạy 24/7, bảo mật API Key tuyệt đối).
+- **Backend API (Node.js/Express + Gemini AI)**: Deploy lên **Render.com** (Web Service Node.js miễn phí, bảo mật API Key tuyệt đối).
 - **CI/CD Quality Gate**: Tự động hóa qua **GitHub Actions** (`.github/workflows/`).
 
 ---
@@ -16,7 +16,7 @@ Dự án hỗ trợ kiến trúc phân tách hiện đại:
 [Frontend: Vercel (React Vite SPA)]  <--- Vercel CDN
           │
           ▼ (HTTPS API Call)
-[Backend: Hugging Face Spaces (Docker Node.js)] <--- Port 7860
+[Backend: Render.com (Node.js Express API)] <--- Port tự động
           │
           ▼ (Internal Proxy)
 [Google Gemini 3.6 Flash API] <--- GEMINI_API_KEY được bảo mật
@@ -42,73 +42,45 @@ Dự án hỗ trợ kiến trúc phân tách hiện đại:
 
 ## 🌐 HƯỚNG DẪN TRIỂN KHAI CHI TIẾT
 
-### Bước 1: Deploy Backend lên Hugging Face Spaces
+### Bước 1: Deploy Backend lên Render.com (Làm trước)
 
-1. Đăng nhập vào [Hugging Face](https://huggingface.co/) và bấm **New Space**.
-2. Thiết lập thông số:
-   - **Space name**: Ví dụ `pharma-study-backend`
-   - **License**: `mit` hoặc `apache-2.0`
-   - **Space SDK**: Chọn **Docker** -> Chọn **Blank**
-   - **Space Hardware**: Chọn **Free (CPU basic · 2 vCPU · 16 GB · Free)**
-   - **Privacy**: `Public` (để Frontend từ Vercel có thể gọi API)
-3. Sau khi tạo Space, vào **Settings** -> **Variables and secrets**:
-   - Thêm Secret `GEMINI_API_KEY`: Điền API key từ Google AI Studio.
-   - Thêm Variable `ALLOWED_ORIGINS`: Điền `*` hoặc domain Vercel của bạn.
-4. Lấy **Direct URL của Space**:
-   - URL có dạng: `https://<username>-<space-name>.hf.space` (Ví dụ: `https://kisukabe-pharma-study-backend.hf.space`).
-   - Kiểm tra bằng cách truy cập: `https://<your-space>.hf.space/api/health` -> Nhận được `{"status":"ok"}` là thành công.
+1. Truy cập [render.com](https://render.com/) và đăng nhập bằng tài khoản GitHub.
+2. Bấm **New +** ở góc trên ➔ Chọn **Web Service**.
+3. Chọn **Build and deploy from a Git repository** ➔ Bấm **Next**.
+4. Tìm và chọn repository `Pharma-study-app` của bạn ➔ Bấm **Connect**.
+5. Cấu hình thông số:
+   - **Name**: `pharma-study-backend` (hoặc tên tùy thích)
+   - **Region**: `Singapore` (hoặc `Oregon`)
+   - **Branch**: `main`
+   - **Runtime**: `Node`
+   - **Build Command**: `npm install && npm run build:backend`
+   - **Start Command**: `npm run start:backend`
+   - **Instance Type**: Chọn **Free** (0$/tháng)
+6. Cuộn xuống mục **Environment Variables** ➔ Bấm **Add Environment Variable**:
+   - `GEMINI_API_KEY`: Dán Key Gemini API của bạn từ Google AI Studio.
+   - `ALLOWED_ORIGINS`: `*`
+7. Bấm **Create Web Service**.
+8. Đợi 1-2 phút Render build xong, bạn sẽ nhận được **URL Backend** ở đầu trang (dạng: `https://pharma-study-backend.onrender.com`).
+   - *Kiểm tra: Mở link `https://pharma-study-backend.onrender.com/api/health` ➔ Thấy `{"status":"ok"}` là backend đã sẵn sàng!*
 
 ---
 
-### Bước 2: Deploy Frontend lên Vercel
+### Bước 2: Deploy Frontend lên Vercel (Làm sau)
 
-1. Đăng nhập vào [Vercel](https://vercel.com/) và bấm **Add New...** -> **Project**.
-2. Import repository GitHub của bạn.
-3. Thiết lập Build & Output:
+1. Truy cập [vercel.com](https://vercel.com/) và đăng nhập bằng tài khoản GitHub.
+2. Bấm **Add New...** ➔ Chọn **Project**.
+3. Tìm kho lưu trữ `Pharma-study-app` của bạn và bấm **Import**.
+4. Cấu hình dự án:
    - **Framework Preset**: `Vite`
    - **Build Command**: `npm run build:frontend`
    - **Output Directory**: `dist`
-4. Cấu hình **Environment Variables**:
-   - `VITE_API_BASE_URL`: Điền URL Backend Hugging Face ở Bước 1 (Ví dụ: `https://kisukabe-pharma-study-backend.hf.space`).
-5. Bấm **Deploy**. Sau 1-2 phút, Frontend đã live trực tuyến!
-
----
-
-## 🔄 Tự Động Hóa CI/CD (GitHub Actions)
-
-Dự án đã tích hợp sẵn 3 workflows trong `.github/workflows/`:
-
-1. **`ci.yml` (Continuous Integration & Quality Gate)**:
-   - Tự động chạy mỗi khi có `push` hoặc `pull_request` vào nhánh `main`.
-   - Chạy kiểm tra TypeScript (`tsc --noEmit`), build thử Frontend, Backend độc lập và Monolith.
-
-2. **`deploy-frontend.yml` (CD Vercel)**:
-   - Tự động trigger build và deploy Frontend lên Vercel khi có commit mới.
-   - Yêu cầu cấu hình GitHub Secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `VITE_API_BASE_URL`.
-
-3. **`deploy-backend-hf.yml` (CD Hugging Face Spaces)**:
-   - Tự động đồng bộ code Backend lên Hugging Face Space repository.
-   - Yêu cầu cấu hình GitHub Secrets: `HF_TOKEN` (lấy tại `huggingface.co/settings/tokens`), `HF_SPACE_REPO` (dạng `username/space-name`).
-
----
-
-## 🐳 Triển Khai Local / VPS Bằng Docker Compose
-
-Nếu muốn chạy toàn bộ trên máy cá nhân hoặc VPS riêng:
-
-```bash
-# 1. Tạo file .env và cấu hình GEMINI_API_KEY
-echo "GEMINI_API_KEY=your_gemini_api_key" > .env
-
-# 2. Khởi chạy 2 container độc lập
-docker-compose up -d --build
-```
-- Frontend: `http://localhost:8080`
-- Backend API: `http://localhost:5000`
-- API Health: `http://localhost:5000/api/health`
+5. Mở mục **Environment Variables**:
+   - **Key**: `VITE_API_BASE_URL`
+   - **Value**: Dán URL Backend Render ở Bước 1 vào (Ví dụ: `https://pharma-study-backend.onrender.com`).
+6. Bấm **Deploy**. Sau 1 phút, ứng dụng của bạn đã chính thức online!
 
 ---
 
 ## 🔐 Bảo Mật API Key
-- `GEMINI_API_KEY` luôn được giữ an toàn phía Backend/Server (trên Hugging Face Space Secret), tuyệt đối không bao giờ được lộ ra mã nguồn trình duyệt Client.
+- `GEMINI_API_KEY` luôn được giữ an toàn phía Backend/Server trên Render.com, tuyệt đối không lộ ở phía Client/Browser.
 - Mọi tương tác AI đều được proxy an toàn qua endpoint `/api/chat` và `/api/generate-cards`.

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: pharma-study-backend
+    runtime: node
+    plan: free
+    region: singapore # hoặc oregon, frankfurt
+    buildCommand: npm install && npm run build:backend
+    startCommand: npm run start:backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: GEMINI_API_KEY
+        sync: false # Render sẽ nhắc bạn nhập API Key khi tạo
+      - key: ALLOWED_ORIGINS
+        value: "*"
