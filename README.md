@@ -12,8 +12,6 @@
 - 📖 **Từ Điển Chuyên Ngành Dược Liệu**: Tra cứu nhanh danh mục cây thuốc, tên khoa học (Latinh), họ thực vật, bộ phận dùng, hoạt chất chính và công dụng chữa bệnh.
 - 🤖 **Trợ Lý Giảng Viên AI (Gemini 3.6 Flash)**: Hỏi đáp, giải thích sâu các câu trắc nghiệm khó, phân biệt cơ chế tác dụng, phương pháp sắc ký (TLC, HPLC) và gợi ý mẹo học tập.
 - 📊 **Thống Kê Tiến Độ Cá Nhân**: Theo dõi số thẻ đã thuộc, lịch sử làm bài thi, tỉ lệ trả lời đúng theo từng chuyên đề (tự động lưu vào trình duyệt).
-- 🌓 **Đa Chế Độ Giao Diện**: Hỗ trợ giao diện Sáng (Light), Tối (Dark) và Tự động theo Hệ thống (System).
-
 ---
 
 ## 🏗️ Kiến Trúc Hệ Thống
@@ -44,23 +42,12 @@ Dự án được xây dựng theo mô hình **Tách rời hiện đại (Decoup
 
 ---
 
-## ❓ Docker, Vercel và Render.com Dùng Để Làm Gì?
+## 🌐 Vai Trò & Áp Dụng Công Nghệ Triển Khai
 
-### 1. 🐳 Docker Dùng Để Làm Gì?
-* **Đóng gói chuẩn hóa**: Toàn bộ mã nguồn, thư viện, môi trường Node.js và Nginx được đóng gói thành các Docker Image độc lập ([Dockerfile.frontend](file:///Users/giabao/Desktop/GItHub/Pharma-study-app/Dockerfile.frontend) & [Dockerfile.backend](file:///Users/giabao/Desktop/GItHub/Pharma-study-app/Dockerfile.backend)).
-* **Chạy 1 lệnh duy nhất (`docker-compose up -d`)**: Bất kỳ ai tải project về đều có thể chạy ngay toàn bộ Frontend + Backend trên máy tính cá nhân hoặc VPS riêng mà **không cần phải cài đặt Node.js hay cấu hình môi trường phức tạp**.
-* **Đảm bảo tính nhất quán**: Code chạy trên máy bạn như thế nào thì khi lên máy chủ production sẽ hoạt động chính xác 100% như vậy.
-
-### 2. ⚡ Vercel Dùng Để Làm Gì?
-* **Host Frontend SPA (React + Vite)**: Vercel là nền tảng tối ưu hàng đầu thế giới cho các ứng dụng React tĩnh.
-* **Tốc độ cực nhanh**: Phân phối ứng dụng qua mạng lưới CDN toàn cầu (Edge Network), giúp người dùng tại Việt Nam mở web gần như ngay lập tức.
-* **Tự động hóa CI/CD**: Mỗi khi bạn `git push` code mới lên GitHub, Vercel sẽ tự động phát hiện, build và cập nhật giao diện web trong vòng 30 giây.
-* **Định tuyến SPA**: File [vercel.json](file:///Users/giabao/Desktop/GItHub/Pharma-study-app/vercel.json) giúp đảm bảo việc chuyển trang không bị lỗi 404.
-
-### 3. 🛡️ Render.com Dùng Để Làm Gì?
-* **Host Backend API (Node.js Express Server)**: Vì Vercel chỉ chạy web tĩnh, ta cần Render.com để chạy máy chủ Backend 24/7.
-* **Bảo mật tuyệt đối `GEMINI_API_KEY`**: Khóa API AI của Google được lưu trên máy chủ Render, người dùng ở trình duyệt hoàn toàn không thể xem trộm được key.
-* **Xử lý Proxy & CORS**: Tiếp nhận các yêu cầu hỏi đáp AI từ Frontend, gọi đến Google AI và trả dữ liệu về an toàn.
+- 🐳 **Docker (`Dockerfile`, `docker-compose`)**: Đóng gói toàn bộ Frontend & Backend thành các container độc lập, giúp chạy ứng dụng trên máy local/VPS nhanh chóng chỉ với 1 lệnh `docker-compose up -d` mà không cần cài môi trường.
+- ⚡ **Vercel**: Nền tảng lưu trữ (Host) **Frontend SPA**, phân phối qua mạng lưới Edge CDN toàn cầu và tự động build/deploy (CI/CD) mỗi khi push code lên GitHub.
+- 🛡️ **Render.com**: Nền tảng lưu trữ (Host) **Backend Express API**, đóng vai trò làm API Proxy chạy 24/7 giúp kết nối và bảo mật tuyệt đối `GEMINI_API_KEY`.
+- 🤖 **GitHub Actions**: Tự động kiểm tra chất lượng code (Typecheck/Lint) và xác thực build mỗi khi có thay đổi trong repository.
 
 ---
 
@@ -115,14 +102,28 @@ docker-compose up -d --build
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+## 🛠️ Ngôn Ngữ, Công Nghệ & Phiên Bản Sử Dụng
 
-- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS v4, Lucide React, Motion.
-- **Backend**: Node.js, Express, `@google/genai` (Google Gen AI SDK), Esbuild, TSX.
-- **DevOps & Deployment**: Docker, Docker Compose, GitHub Actions (CI/CD), Vercel, Render.com.
+Dự án sử dụng các công nghệ và thư viện phiên bản mới nhất:
+
+| Thành Phần | Công Nghệ / Thư Viện | Phiên Bản | Mục Đích Sử Dụng |
+|---|---|---|---|
+| **Môi Trường & Ngôn Ngữ** | **Node.js** | `v20.x` (LTS) | Môi trường thực thi JavaScript/TypeScript server & build |
+| | **TypeScript** | `v5.8.2` | Ngôn ngữ lập trình chính, đảm bảo an toàn kiểu dữ liệu (Type-Safe) |
+| **Frontend Framework** | **React** | `v19.0.1` | Thư viện xây dựng giao diện người dùng SPA |
+| | **React DOM** | `v19.0.1` | Render React elements vào DOM |
+| **Build Tool & Bundler**| **Vite** | `v6.2.3` | Bundler & Dev Server siêu tốc cho Frontend |
+| | **Esbuild** | `v0.25.0` | Đóng gói Backend Express thành Single File CJS cực nhanh |
+| | **TSX** | `v4.21.0` | Chạy trực tiếp file TypeScript trên Node.js không cần compile |
+| **Giao Diện & Hiệu Ứng** | **Tailwind CSS** | `v4.1.14` | Framework CSS thế hệ mới, tối ưu kích thước và tốc độ render |
+| | **Motion (Framer)** | `v12.23.24` | Tạo animation, hiệu ứng lật thẻ và chuyển động mượt mà |
+| | **Lucide React** | `v0.546.0` | Bộ icon SVG hiện đại, sắc nét |
+| **Backend & AI Engine** | **Express.js** | `v4.21.2` | Web Framework xây dựng REST API Proxy |
+| | **@google/genai** | `v2.4.0` | SDK chính thức từ Google kết nối **Gemini 3.6 Flash** |
+| | **CORS & Dotenv** | `cors v2.8.6`, `dotenv v17.2.3` | Xử lý Cross-Origin Resource Sharing và biến môi trường |
+| **DevOps & Hosting** | **Docker & Compose** | Dockerfile multi-stage, compose `v3.8` | Container hóa Nginx Alpine (Frontend) & Node Alpine (Backend) |
+| | **GitHub Actions** | Workflows v4 | Tự động hóa CI/CD kiểm tra typecheck và build tự động |
+| | **Vercel** | Edge Network / Vite Preset | Nền tảng hosting Frontend tĩnh toàn cầu |
+| | **Render.com** | Node.js Web Service | Máy chủ hosting Backend API 24/7 |
 
 ---
-
-## 📄 Bản Quyền & Giấy Phép
-Dự án được xây dựng phục vụ mục đích học tập, nghiên cứu và ôn thi môn Dược Liệu Học.
-Nội dung bám sát khung chương trình đào tạo Dược học chính quy tại Việt Nam.
