@@ -1,0 +1,6 @@
+{
+  "name": "Dược Liệu Học - Flashcard & Trắc Nghiệm",
+  "description": "Ứng dụng ôn tập kiến thức Dược liệu học với thẻ ghi nhớ 3D, ngân hàng trắc nghiệm 60+ câu thi thử có giải thích chi tiết, tra cứu từ điển và trợ lý AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

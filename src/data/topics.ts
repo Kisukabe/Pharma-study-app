@@ -1,0 +1,68 @@
+import { Topic } from '../types';
+
+export const TOPICS: Topic[] = [
+  {
+    id: 'all',
+    title: 'Tất Cả Ngân Hàng Đề',
+    description: 'Toàn bộ 110+ câu hỏi trắc nghiệm & flashcards tổng hợp Dược liệu 1',
+    iconName: 'BookOpen',
+    questionCount: 110,
+    flashcardCount: 22,
+  },
+  {
+    id: 'd2022',
+    title: '📝 Đề Giữa Kỳ D2022 (60 câu / 30ph)',
+    description: 'Đề thi chính thức Giữa Kỳ Dược liệu 1 Lớp D2022 (60 câu trong 30 phút)',
+    iconName: 'Award',
+    questionCount: 60,
+    flashcardCount: 22,
+  },
+  {
+    id: 'deso2',
+    title: '📄 Đề Giữa Kỳ Số 2 (60 câu / 30ph)',
+    description: 'Đề kiểm tra Giữa kỳ Số 2 - 60 câu hỏi chuẩn cấu trúc đề thi 30 phút',
+    iconName: 'FileText',
+    questionCount: 60,
+    flashcardCount: 22,
+  },
+  {
+    id: 'deso3',
+    title: '📜 Đề Giữa Kỳ Số 3 (80 câu / 30ph)',
+    description: 'Bộ câu hỏi kiểm tra Dược liệu 1 Số 3 nâng cao (Chế biến, Coumarin, Glycosid, Carbohydrat)',
+    iconName: 'Layers',
+    questionCount: 80,
+    flashcardCount: 22,
+  },
+  {
+    id: 'daicuong',
+    title: '🌿 Đại Cương & Lịch Sử',
+    description: 'Khái niệm Pharmacognosy, danh y Việt Nam (Tuệ Tĩnh, Lãn Ông) & Thế giới',
+    iconName: 'GraduationCap',
+    questionCount: 60,
+    flashcardCount: 22,
+  },
+  {
+    id: 'harvest-process',
+    title: '🌱 Thu Hái & Chế Biến',
+    description: 'Thời điểm thu hái bộ phận, diệt/ức chế enzym, sấy/phơi, tiêu chuẩn GACP',
+    iconName: 'Sprout',
+    questionCount: 25,
+    flashcardCount: 7,
+  },
+  {
+    id: 'analysis-chromatography',
+    title: '🧪 Sắc Ký & Kiểm Nghiệm',
+    description: 'Chiết xuất, định tính, độ tro, độ ẩm, sắc ký TLC, HPLC & các loại phổ (NMR, MS, UV)',
+    iconName: 'FlaskConical',
+    questionCount: 25,
+    flashcardCount: 8,
+  },
+  {
+    id: 'compounds-resources',
+    title: '🍃 Hoạt Chất & Tài Nguyên',
+    description: 'Coumarin, Glycosid, Carbohydrat (Tinh bột, Pectin, Inulin), Bảo tồn sinh học CITES',
+    iconName: 'Leaf',
+    questionCount: 30,
+    flashcardCount: 7,
+  },
+];
