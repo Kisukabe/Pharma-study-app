@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Send, Bot, User, Loader2 } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 interface AiAssistantProps {
   selectedSource?: string;
@@ -75,7 +76,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ selectedSource = 'all'
     setLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(getApiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userMsg, sourceContext: selectedSource }),
