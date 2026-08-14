@@ -31,7 +31,7 @@ jobs:
         id: check-secrets
         run: |
           if [ -z "${{ secrets.VERCEL_TOKEN }}" ] || [ -z "${{ secrets.VERCEL_ORG_ID }}" ] || [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
-            echo "::warning ::Vercel Secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID) chưa được cấu hình trong GitHub Repository Secrets. Bỏ qua bước deploy."
+            echo "::warning ::Vercel Secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID) chưa được cấu hình đầy đủ trong GitHub Repository Secrets. Bỏ qua bước deploy."
             echo "has_secrets=false" >> $GITHUB_OUTPUT
           else
             echo "has_secrets=true" >> $GITHUB_OUTPUT
@@ -41,13 +41,10 @@ jobs:
         if: steps.check-secrets.outputs.has_secrets == 'true'
         run: npm ci
 
-      - name: Deploy to Vercel (Production)
+      - name: Deploy to Vercel (Official Vercel CLI)
         if: steps.check-secrets.outputs.has_secrets == 'true'
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
         env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}

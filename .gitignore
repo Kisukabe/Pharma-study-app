@@ -60,3 +60,5 @@ Thumbs.db
 .stylelintcache
 *.tmp
 *.temp
+.vercel
+.env*
