@@ -605,5 +605,629 @@ export const QUIZ_QUESTIONS: Question[] = [
     topic: "deso3",
     isMidterm: true,
     difficulty: "Trung bình"
+  },
+
+  // =========================================================================
+  // --- BỘ 50 CÂU HỎI TRẮC NGHIỆM GIÁO TRÌNH ĐẠI CƯƠNG DƯỢC LIỆU HỌC (DCQ2022) ---
+  // =========================================================================
+  {
+    id: 101,
+    question: "Thuật ngữ 'Pharmacognosis' lần đầu tiên được đề xuất vào năm 1811 bởi tác giả nào?",
+    options: ["J.A. Schmidt", "C.A. Seydler", "Wasicki", "Carl Linnaeus"],
+    correctIndex: 0,
+    explanation: "Năm 1811, J.A. Schmidt lần đầu tiên đề xuất thuật ngữ 'Pharmacognosis' trong tác phẩm Lehrbuch der Materia Medica.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 102,
+    question: "Tác phẩm 'Analecta Pharmacognostica' xuất bản năm 1815 là của nhà khoa học nào?",
+    options: ["Hippocrates", "C.A. Seydler", "J.A. Schmidt", "Paracelsus"],
+    correctIndex: 1,
+    explanation: "C.A. Seydler (1815) là người đề xuất thuật ngữ và xuất bản luận án 'Analecta Pharmacognostica'.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 103,
+    question: "Thuật ngữ 'Physiopharmacognosy' do Wasicki đề xuất có ý nghĩa bản chất là gì?",
+    options: [
+      "Hiểu biết về các loại thuốc có nguồn gốc tự nhiên (để phân biệt với thuốc hóa dược tổng hợp)",
+      "Nghiên cứu về cơ chế tác dụng sinh lý của thuốc trên cơ thể người",
+      "Nghiên cứu sự chuyển hóa của thuốc qua đường tiêu hóa",
+      "Nghiên cứu về các dạng bào chế thuốc hiện đại"
+    ],
+    correctIndex: 0,
+    explanation: "'Physio' bắt nguồn từ gốc tự nhiên/thiên nhiên; Wasicki đề xuất Physiopharmacognosy để chỉ các hiểu biết về thuốc có nguồn gốc thiên nhiên nhằm phân biệt với hóa dược.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 104,
+    question: "Theo định nghĩa hẹp (cũng là hướng tập trung chủ yếu hiện nay), Dược liệu học là môn khoa học nghiên cứu về:",
+    options: [
+      "Các nguyên liệu làm thuốc có nguồn gốc vô cơ và khoáng vật",
+      "Các nguyên liệu làm thuốc có nguồn gốc sinh học",
+      "Các hợp chất hóa dược tổng hợp trong phòng thí nghiệm",
+      "Kỹ thuật đóng gói bao bì dược phẩm"
+    ],
+    correctIndex: 1,
+    explanation: "Định nghĩa hẹp hiện đại: Dược liệu học là môn khoa học nghiên cứu về các nguyên liệu làm thuốc có nguồn gốc sinh học (thực vật, động vật, vi sinh vật, biển).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 105,
+    question: "Trong 4 nguồn nguyên liệu sinh học làm thuốc, đối tượng nào cung cấp nhiều hoạt chất nhất cho y học hiện đại?",
+    options: ["Động vật", "Vi sinh vật", "Thực vật", "Tài nguyên biển"],
+    correctIndex: 2,
+    explanation: "Thực vật là giới sinh vật cung cấp số lượng hoạt chất đa dạng và phong phú nhất (>80% hoạt chất tự nhiên) cho y dược học hiện đại.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 106,
+    question: "Điểm phân biệt căn bản giữa 'Cây thuốc' và 'Dược liệu' là:",
+    options: [
+      "Cây thuốc là cây còn sống; Dược liệu là bộ phận hoặc sản phẩm đã lấy ra từ cây thuốc (khô hoặc tươi) dùng làm thuốc",
+      "Cây thuốc dùng trong Y học hiện đại; Dược liệu chỉ dùng trong Đông y",
+      "Cây thuốc chỉ có độc tính; Dược liệu không có độc tính",
+      "Cây thuốc là chất tinh khiết; Dược liệu là hỗn hợp cao chiết"
+    ],
+    correctIndex: 0,
+    explanation: "Cây thuốc là cơ thể thực vật còn sống cung cấp nguyên liệu; Dược liệu là bộ phận/sản phẩm đã thu hái, sơ chế phục vụ mục đích y học.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 107,
+    question: "Sản phẩm dịch chiết từ dược liệu sau khi cô bớt dung môi, chứa khoảng 40 - 60% dược chất cùng với các tạp chất tự nhiên được gọi là:",
+    options: ["Hoạt chất tinh khiết", "Cao chiết toàn phần", "Cao chiết tinh chế (hoạt chất toàn phần)", "Chất chuẩn đối chiếu"],
+    correctIndex: 1,
+    explanation: "Cao chiết toàn phần chứa 40-60% dược chất cùng các chất phụ trợ tan trong dung môi chiết xuất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 108,
+    question: "Đặc điểm của 'Cao chiết tinh chế' (Hoạt chất toàn phần, ví dụ cao Ginkgo biloba) là gì?",
+    options: [
+      "Là một chất hóa học đơn lẻ đạt độ tinh khiết > 99%",
+      "Là hỗn hợp đã được loại bỏ phần lớn tạp chất, chỉ chuẩn hóa giữ lại một hoặc một vài nhóm hoạt chất chính",
+      "Chưa qua bất kỳ quá trình lọc hoặc loại tạp nào",
+      "Là bột dược liệu thô tán mịn"
+    ],
+    correctIndex: 1,
+    explanation: "Cao chiết tinh chế đã qua các công đoạn loại tạp chất đại phân tử, chuẩn hóa nồng độ nhóm hoạt chất đặc hiệu (như flavonoid và terpenoid trong bạch quả).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 109,
+    question: "Vì sao trong nhiều trường hợp hiện nay, người ta có xu hướng quay lại sử dụng cao chiết toàn phần hoặc tinh chế thay vì hoạt chất tinh khiết?",
+    options: [
+      "Vì các thành phần trong hỗn hợp có tác dụng hiệp đồng bổ sung, tăng hiệu quả và giảm tác dụng phụ, tiết kiệm chi phí",
+      "Vì hoạt chất tinh khiết không thể tổng hợp hoặc phân lập được",
+      "Vì cao chiết không bao giờ bị nấm mốc hay biến chất",
+      "Vì cao chiết luôn có chỉ số trị liệu hẹp hơn hoạt chất tinh khiết"
+    ],
+    correctIndex: 0,
+    explanation: "Các hợp chất tự nhiên trong cao chiết tạo hiệu ứng cộng lực (synergy), bảo vệ chống oxy hóa, trợ tan sinh học và giảm chi phí tinh chế đắt đỏ.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 110,
+    question: "Bằng chứng khảo cổ học sớm nhất (khoảng 60.000 TCN) chứng minh người tiền sử đã biết sử dụng dược liệu là:",
+    options: [
+      "Bản khắc đất sét nung tại Babylon",
+      "Mộ táng người Neandertan được chôn cùng lượng lớn phấn hoa của nhiều loài cây thuốc",
+      "Các cuộn giấy cói Papyrus Ebers dưới kim tự tháp",
+      "Các bài thơ khắc trên mai rùa thời nhà Thương"
+    ],
+    correctIndex: 1,
+    explanation: "Phát hiện phấn hoa cây thuốc mật độ cao trong mộ táng tộc người Neandertan (60.000 TCN) là bằng chứng sớm nhất về mối quan hệ giữa con người và thảo dược trị bệnh.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 111,
+    question: "Lịch sử cho thấy ngành Dược chính thức tách rời độc lập khỏi ngành Y vào khoảng thời gian nào?",
+    options: ["Khoảng năm 1700", "Khoảng năm 500 TCN", "Khoảng năm 1945", "Khoảng thế kỷ 14"],
+    correctIndex: 0,
+    explanation: "Trước thế kỷ 18, thầy thuốc kiêm cả việc hái cây, bào chế và trị bệnh. Đến khoảng năm 1700, ngành Dược mới chính thức tách độc lập khỏi Y khoa.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 112,
+    question: "Tác phẩm y dược cổ nổi tiếng nhất của nền văn minh Ai Cập cổ đại (khoảng 1550 TCN) là:",
+    options: ["Bản thảo Papyrus Ebers", "Thần Nông Bản Thảo Kinh", "Thương Hàn Luận", "De Materia Medica"],
+    correctIndex: 0,
+    explanation: "Papyrus Ebers (1550 TCN) là bản thảo y học cổ dài hơn 20m mô tả hàng trăm phương thuốc thảo mộc và khoáng vật của người Ai Cập cổ đại.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 113,
+    question: "Hệ thống y học cổ truyền Ayurveda ('Khoa học về sự sống') bắt nguồn từ nền văn minh nào?",
+    options: ["Hy Lạp cổ đại", "Ấn Độ cổ đại", "Ai Cập cổ đại", "La Mã cổ đại"],
+    correctIndex: 1,
+    explanation: "Ayurveda là nền y học cổ truyền kinh điển của Ấn Độ, nhấn mạnh sự cân bằng giữa thể xác, tinh thần và thiên nhiên.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 114,
+    question: "Hai danh y huyền thoại của nền y học Ayurveda Ấn Độ là:",
+    options: ["Charaka và Susruta", "Hippocrates và Galen", "Tuệ Tĩnh và Lê Hữu Trác", "Thần Nông và Lý Thời Trân"],
+    correctIndex: 0,
+    explanation: "Charaka (tác giả 500 phương thuốc) và Susruta (tác giả mô tả 750 cây thuốc, bậc thầy phẫu thuật) là hai đại danh y của Ayurveda Ấn Độ.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 115,
+    question: "Ai được tôn vinh là tác giả bộ sách kinh điển 'De Materia Medica' mô tả hơn 600 vị thuốc thảo mộc?",
+    options: ["Dioscorides", "Hippocrates", "Theophrastus", "Galen"],
+    correctIndex: 0,
+    explanation: "Dioscorides (bác sĩ quân đội La Mã thế kỷ I) là tác giả bộ sách 'De Materia Medica' làm kim chỉ nam y dược suốt 15 thế kỷ.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 116,
+    question: "Thầy thuốc Paracelsus (1493 - 1541) nổi tiếng với tư tưởng đột phá nào?",
+    options: [
+      "Đề xướng học thuyết 'Quinta essentia' (Chất tinh túy), cổ xúy chiết xuất và dùng độc vị",
+      "Thuyết 4 thể dịch của cơ thể",
+      "Chủ trương không dùng bất kỳ hóa chất nào làm thuốc",
+      "Phương pháp châm cứu bấm huyệt"
+    ],
+    correctIndex: 0,
+    explanation: "Paracelsus đề xướng 'Quinta essentia', cho rằng trong cây chỉ có phần nhỏ là chất tinh túy mang hoạt tính trị liệu, mở đường cho Hóa Dược và chiết xuất hoạt chất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 117,
+    question: "Mốc son lịch sử Friedrich Sertürner phân lập thành công Morphine từ nhựa thuốc phiện diễn ra vào năm nào?",
+    options: ["Năm 1806", "Năm 1700", "Năm 1910", "Năm 1850"],
+    correctIndex: 0,
+    explanation: "Năm 1806, Friedrich Sertürner phân lập thành công tinh thể morphin, chứng minh giả thuyết của Paracelsus và khai sinh kỷ nguyên phân lập alkaloid.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 118,
+    question: "Tục lệ nhai trầu, uống chè vối, dùng gừng hành tỏi phòng bệnh của người Việt đã được ghi nhận từ thời kỳ nào?",
+    options: ["Thời Hồng Bàng (2879 TCN)", "Thời nhà Lý", "Thời nhà Nguyễn", "Thời Pháp thuộc"],
+    correctIndex: 0,
+    explanation: "Từ thời Hồng Bàng (2879 TCN), người Việt cổ đã hình thành các thói quen vệ sinh và dùng thảo dược quen thuộc để bảo vệ sức khỏe.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 119,
+    question: "Dưới thời nhà Lý ở Việt Nam, cơ quan y tế phụ trách khám chữa bệnh và quản lý dược liệu có tên là:",
+    options: ["Ty Thái y", "Viện Thái y", "Tế sinh đường", "Thái y viện Triều Nguyễn"],
+    correctIndex: 0,
+    explanation: "Thời nhà Lý thành lập Ty Thái y để chăm lo y tế cho vua quan và giao lưu y học với Tống Huy Tông.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 120,
+    question: "Dưới thời nhà Trần, Viện Thái y đã tổ chức hoạt động dược liệu nổi bật nào phục vụ quốc phòng?",
+    options: [
+      "Tổ chức thu hái và trồng trọt cây thuốc Nam chuẩn bị y tế cho 3 lần kháng chiến chống quân Nguyên Mông",
+      "Nhập khẩu toàn bộ thuốc từ phương Bắc",
+      "Cấm dân chúng sử dụng thuốc Nam",
+      "Mở trường đại học y dược Tây y"
+    ],
+    correctIndex: 0,
+    explanation: "Nhà Trần lập Viện Thái y, tổ chức thu hái dược liệu thuốc Nam trên quy mô lớn làm hậu cần cứu thương chiến thắng 3 lần quân Nguyên Mông.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 121,
+    question: "Vị danh y nào được suy tôn là 'Ông tổ thực sự sáng lập nghề thuốc Nam Việt Nam' với tuyên ngôn 'Nam dược trị Nam nhân'?",
+    options: ["Thiền sư Tuệ Tĩnh (Nguyễn Bá Tĩnh)", "Hải Thượng Lãn Ông (Lê Hữu Trác)", "Phan Phù Tiên", "Chu Văn An"],
+    correctIndex: 0,
+    explanation: "Thiền sư Tuệ Tĩnh (thế kỷ 14) là người xướng xuất tư tưởng 'Nam dược trị Nam nhân' và biên soạn 'Nam Dược Thần Hiệu'.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 122,
+    question: "Bộ bách khoa toàn thư y học cổ truyền gồm 28 tập, 66 quyển 'Hải Thượng Y Tông Tâm Lĩnh' là trước tác của ai?",
+    options: ["Lê Hữu Trác (Hải Thượng Lãn Ông)", "Nguyễn Bá Tĩnh (Tuệ Tĩnh)", "Nguyễn Trãi", "Lý Thời Trân"],
+    correctIndex: 0,
+    explanation: "Hải Thượng Lãn Ông Lê Hữu Trác (1720 - 1791) dành hơn 30 năm biên soạn bộ 'Hải Thượng Y Tông Tâm Lĩnh' đồ sộ.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 123,
+    question: "Trong danh xưng 'Hải Thượng Lãn Ông', chữ 'Lãn Ông' mang ý nghĩa gì?",
+    options: [
+      "Ông già lười công danh phú quý (từ chối làm quan trong phủ Chúa Trịnh)",
+      "Người thích sống an nhàn không làm việc",
+      "Thầy thuốc chuyên chữa bệnh cho người già",
+      "Tên một địa danh tại Hưng Yên"
+    ],
+    correctIndex: 0,
+    explanation: "Lê Hữu Trác tự đặt hiệu là Lãn Ông (ông già lười) hàm ý lười biếng danh lợi, 3 lần chữa khỏi bệnh cho chúa Trịnh đều từ chối ở lại làm quan để về quê viết sách.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 124,
+    question: "Theo báo cáo của Tổ chức Y tế Thế giới (WHO), khoảng bao nhiêu % dân số thế giới phụ thuộc vào thuốc tự nhiên ban đầu?",
+    options: ["Khoảng 80%", "Khoảng 20%", "Khoảng 50%", "Khoảng 95%"],
+    correctIndex: 0,
+    explanation: "Khoảng 80% dân số toàn cầu (chủ yếu ở các nước đang phát triển) phụ thuộc vào y học cổ truyền và thảo dược trong chăm sóc sức khỏe ban đầu.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 125,
+    question: "Trên lâm sàng y học hiện đại ngày nay, tỉ lệ thuốc có nguồn gốc trực tiếp hoặc bán tổng hợp từ thiên nhiên là:",
+    options: ["Trên 50%", "Dưới 10%", "Khoảng 25%", "100%"],
+    correctIndex: 0,
+    explanation: "Trên 50% thuốc sử dụng trên lâm sàng hiện nay có nguồn gốc từ tự nhiên (hoặc bán tổng hợp từ khung cấu trúc tự nhiên).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 126,
+    question: "Theo quy định của Luật Dược 2016, tiêu chí phân biệt cơ bản giữa Thuốc Dược Liệu và Thuốc Cổ Truyền là gì?",
+    options: [
+      "Thuốc Dược liệu xây dựng công thức theo Dược lý hiện đại; Thuốc Cổ truyền xây dựng theo Lý luận YHCT",
+      "Thuốc Dược liệu chỉ chứa hóa chất; Thuốc Cổ truyền chỉ chứa cây cỏ",
+      "Thuốc Dược liệu không cần kiểm nghiệm; Thuốc Cổ truyền phải kiểm nghiệm nghiêm ngặt",
+      "Thuốc Dược liệu chỉ do bác sĩ kê đơn; Thuốc Cổ truyền luôn không cần kê đơn"
+    ],
+    correctIndex: 0,
+    explanation: "Thuốc Dược liệu dùng phương pháp Dược lý hiện đại chứng minh công thức; Thuốc Cổ truyền dùng lý luận Y học cổ truyền (Quân - Thần - Tá - Sứ).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 127,
+    question: "Dược liệu chứa tinh dầu bắt buộc phải thu hái vào buổi sáng sớm trước khi mặt trời mọc nhằm mục đích gì?",
+    options: [
+      "Tránh tinh dầu bị bốc hơi hao hụt do sức nóng mặt trời",
+      "Tránh sâu bọ ăn lá vào buổi trưa",
+      "Để lá có màu xanh đẹp hơn",
+      "Để dễ chiết nước lạnh hơn"
+    ],
+    correctIndex: 0,
+    explanation: "Tinh dầu là hợp chất dễ bay hơi; nắng gắt ban trưa sẽ làm tinh dầu bốc hơi mạnh làm giảm nghiêm trọng hàm lượng hoạt chất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 128,
+    question: "Bộ phận Rễ và Thân rễ (Củ) của cây thuốc được khuyến cáo thu hái vào thời điểm nào tốt nhất?",
+    options: [
+      "Cuối thời kỳ sinh dưỡng (cuối thu - đầu đông hoặc cuối mùa mưa)",
+      "Đầu mùa xuân khi cây vừa đâm chồi",
+      "Giữa mùa hè khi cây đang ra hoa rộ",
+      "Bất kỳ thời điểm nào trong năm"
+    ],
+    correctIndex: 0,
+    explanation: "Cuối thời kỳ sinh dưỡng cây ngừng phát triển chồi lá, toàn bộ chất dinh dưỡng và hoạt chất tích tụ dồn đặc xuống củ rễ dưới đất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 129,
+    question: "Lá và ngọn non của cây thuốc nên thu hoạch vào giai đoạn nào để đạt hàm lượng hoạt chất cao nhất?",
+    options: [
+      "Khi cây quang hợp mạnh nhất: Trước khi ra hoa hoặc bắt đầu chớm nụ",
+      "Sau khi hoa đã tàn và quả đã chín rụng",
+      "Vào mùa đông khi lá chuyển vàng úa",
+      "Khi cây vừa nảy mầm cao 2cm"
+    ],
+    correctIndex: 0,
+    explanation: "Lá bánh tẻ phát triển đầy đủ trước khi ra hoa có hoạt động quang hợp mạnh nhất và tích lũy tối đa hoạt chất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 130,
+    question: "Nếu muốn thu hoạch vỏ cây (như Hoàng bá, Đỗ trọng) mà vẫn giữ cho cây sống tiếp, người ta thu hái vào mùa nào?",
+    options: ["Mùa xuân", "Mùa đông", "Mùa thu", "Mùa khô hạn"],
+    correctIndex: 0,
+    explanation: "Mùa xuân cây đâm chồi nảy lộc, nhiều nước và nhựa luyện, tầng phát sinh hoạt động mạnh giúp bóc vỏ dễ dàng và cây mau liền vỏ để sống tiếp.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 131,
+    question: "Dược liệu nào sau đây bắt buộc phải thu hái khi còn ở giai đoạn NỤ HOA?",
+    options: [
+      "Nụ hoa hòe, Nụ đinh hương, Kim ngân hoa",
+      "Hồng hoa, Cà độc dược",
+      "Hoa cúc La Mã, Hoa hướng dương",
+      "Hoa sen, Hoa dâm bụt"
+    ],
+    correctIndex: 0,
+    explanation: "Hoa hòe (chứa Rutin), Đinh hương (chứa Eugenol), Kim ngân hoa tích lũy hoạt chất cao nhất khi còn là nụ chưa nở.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 132,
+    question: "Vị thuốc Chỉ thực trong Đông y là bộ phận nào của cây chi Citrus?",
+    options: ["Quả hái khi còn non", "Quả hái trước khi chín", "Quả hái khi đã chín mọng", "Hạt của quả chín"],
+    correctIndex: 0,
+    explanation: "Chỉ thực là quả non rụng hoặc thu hái sớm (chứa hàm lượng flavonoid rất cao).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 133,
+    question: "Vị thuốc Chỉ xác trong Đông y được thu hái ở giai đoạn nào?",
+    options: ["Quả thu hái trước khi chín (quả bánh tẻ)", "Quả non vừa đậu", "Quả chín nẫu", "Vỏ rễ cây cam"],
+    correctIndex: 0,
+    explanation: "Chỉ xác là quả gần chín (bánh tẻ), bổ đôi phơi khô.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 134,
+    question: "Bốn nội dung trụ cột trong tiêu chuẩn GACP-WHO (Thực hành tốt trồng trọt và thu hái cây thuốc) gồm:",
+    options: [
+      "ĐÚNG (giống loài) – TỐT (chất lượng) – AN TOÀN (sạch, môi trường) – KINH TẾ (hiệu quả)",
+      "NHANH – NHIỀU – TỐT – RẺ",
+      "KHÔ – SẠCH – ĐẸP – RẺ",
+      "ĐỒNG ĐỀU – KHÔNG MỐC – KHÔNG MỌT – ĐÚNG GIÁ"
+    ],
+    correctIndex: 0,
+    explanation: "GACP-WHO quy định 4 tiêu chí cốt lõi: Đúng định danh, Tốt chất lượng, An toàn cho người & sinh thái, Kinh tế tối ưu.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 135,
+    question: "Yếu tố môi trường nào là nguyên nhân CHỦ YẾU và nguy hiểm nhất gây hư hỏng dược liệu trong quá trình bảo quản?",
+    options: ["Độ ẩm", "Ánh sáng tán xạ", "Tiếng ồn", "Bụi bẩn không khí"],
+    correctIndex: 0,
+    explanation: "Độ ẩm kích hoạt enzym nội sinh thủy phân hoạt chất và tạo điều kiện cho nấm mốc nảy mầm sinh độc tố aflatoxin, hô hấp tạo thêm nước làm hỏng dược liệu theo vòng xoắn ốc.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 136,
+    question: "Theo Dược điển Việt Nam, giới hạn độ ẩm an toàn để bảo quản đa số dược liệu khô thông thường là:",
+    options: ["Không quá 13%", "Không quá 25%", "Phải bằng 0%", "Không quá 30%"],
+    correctIndex: 0,
+    explanation: "Giới hạn độ ẩm an toàn tiêu chuẩn của đa số dược liệu là ≤ 13% (trừ một số dược liệu giàu đường cho phép cao hơn một chút).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 137,
+    question: "Phương pháp sắc ký nào sau đây sử dụng pha tĩnh là lớp mỏng chất hấp phụ tráng trên bản nhôm hoặc kính để định tính nhận biết hoạt chất?",
+    options: ["Sắc ký lớp mỏng (TLC / HPTLC)", "Sắc ký khí (GC)", "Điện di mao quản", "Sắc ký lỏng siêu tới hạn"],
+    correctIndex: 0,
+    explanation: "Sắc ký lớp mỏng (Thin Layer Chromatography - TLC) có pha tĩnh là lớp mỏng Silica gel trải phẳng.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 138,
+    question: "Mục đích chính của phương pháp 'Sắc ký điều chế' (Preparative Chromatography) là gì?",
+    options: [
+      "Nhằm tách và thu lấy hợp chất tinh khiết khỏi hỗn hợp dịch chiết",
+      "Nhằm đo diện tích pic định lượng hàm lượng phần trăm",
+      "Nhằm kiểm tra độ ẩm của dược liệu",
+      "Nhằm diệt vi khuẩn trong mẫu"
+    ],
+    correctIndex: 0,
+    explanation: "Sắc ký điều chế (Preparative TLC/Column) được thiết kế với lượng mẫu lớn nhằm mục đích phân lập và thu hồi chất tinh khiết.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 139,
+    question: "Kỹ thuật 'Sắc ký điểm chỉ' (Chromatographic Fingerprint) trên HPLC được ứng dụng chủ yếu để:",
+    options: [
+      "So sánh toàn bộ bản đồ sắc ký đồ phức tạp của mẫu thử với mẫu chuẩn nhằm định danh chính xác loài dược liệu",
+      "Xác định độ ẩm và độ tro của dược liệu",
+      "Phá hủy cấu trúc phân tử thành mảnh vỡ",
+      "Xác định đồng phân quay cực"
+    ],
+    correctIndex: 0,
+    explanation: "Fingerprint HPLC cung cấp dấu vân tay hóa học đặc trưng, dùng so sánh phân biệt dược liệu thật - giả (như phân biệt Sâm Ngọc Linh với sâm khác).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 140,
+    question: "Quang phổ Tử ngoại – Khả kiến (UV-Vis) trong nghiên cứu dược liệu chủ yếu dùng để phát hiện cấu trúc nào?",
+    options: [
+      "Các hệ nối đôi, nối đôi liên hợp và vòng thơm (nhóm mang màu)",
+      "Nguyên tử Carbon bất đối",
+      "Khối lượng phân tử chính xác",
+      "Các mảnh vỡ ion phân tử"
+    ],
+    correctIndex: 0,
+    explanation: "UV-Vis (190-800 nm) đo sự hấp thu năng lượng kích thích electron của các hệ nối đôi liên hợp (chromophore).",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 141,
+    question: "Phương pháp Quang phổ Hồng ngoại (IR) cung cấp thông tin trực tiếp về:",
+    options: [
+      "Các nhóm chức hóa học (-OH, C=O, -COOH...) và liên kết bội trong phân tử",
+      "Phân tử lượng chính xác của hợp chất",
+      "Số lượng nguyên tử hydro trong phân tử",
+      "Độ tinh khiết sinh học của dược liệu"
+    ],
+    correctIndex: 0,
+    explanation: "Phổ IR đo dao động hóa trị và biến dạng của các liên kết hóa học, giúp nhận diện nhóm chức đặc trưng.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 142,
+    question: "Phổ Cộng hưởng từ hạt nhân (NMR 1H và 13C) là phương pháp đặc trưng nhất để xác định:",
+    options: [
+      "Bộ khung cấu trúc hóa học và vị trí các nguyên tử C, H trong phân tử",
+      "Khối lượng ion phân tử",
+      "Góc quay cực của dung dịch",
+      "Độ tan của chất trong dung môi"
+    ],
+    correctIndex: 0,
+    explanation: "NMR 1D và 2D là công cụ quyền lực nhất giúp giải mã hoàn chỉnh cấu trúc khung phân tử hữu cơ.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 143,
+    question: "Phương pháp nào sau đây giúp xác định chính xác PHÂN TỬ LƯỢNG và các mảnh vỡ cấu trúc của một chất mới?",
+    options: ["Phổ Khối (Mass Spectrometry - MS)", "Phổ UV-Vis", "Khúc xạ kế", "Phổ IR"],
+    correctIndex: 0,
+    explanation: "Khối phổ (MS) đo tỉ số m/z của các ion phân tử, cho biết chính xác phân tử lượng đến 4 số lẻ thập phân.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 144,
+    question: "Trong cấu tạo tế bào thực vật, các hợp chất chuyển hóa thứ cấp làm thuốc phân bố chủ yếu ở bào quan nào?",
+    options: ["Không bào (Vacuole)", "Lục lạp", "Ti thể", "Nhân tế bào"],
+    correctIndex: 0,
+    explanation: "Đa phần các chất chuyển hóa thứ cấp (alkaloid, flavonoid, glycosid, tanin...) được tổng hợp và dự trữ trong không bào.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 145,
+    question: "Cấu trúc vi thể nào liên thông giữa các tế bào thực vật liền kề, cho phép hoạt chất khuếch tán qua màng khi chiết xuất?",
+    options: ["Kênh bào tương (Plasmodesmata)", "Màng nhân", "Lỗ khí khổng", "Tầng biểu bì cutin"],
+    correctIndex: 0,
+    explanation: "Kênh bào tương (Plasmodesmata) là cầu nối tế bào chất giữa các tế bào thực vật, hoạt chất có kích thước nhỏ hơn đường kính kênh sẽ đi xuyên qua được.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 146,
+    question: "Tại sao trong chiết xuất công nghiệp người ta ưu tiên giữ tế bào nguyên vẹn thay vì phá vỡ tế bào?",
+    options: [
+      "Vì vách tế bào đóng vai trò màng siêu lọc giữ lại các đại phân tử (tinh bột, chất nhầy, protein), giúp dịch chiết trong và dễ lọc",
+      "Vì tế bào bị vỡ sẽ không giải phóng hoạt chất",
+      "Vì phá vỡ tế bào làm dung môi bốc hơi hết",
+      "Vì chiết tế bào nguyên vẹn luôn tốn ít dung môi hơn"
+    ],
+    correctIndex: 0,
+    explanation: "Giữ tế bào nguyên vẹn ngăn các chất đại phân tử (nhầy, pectin, tinh bột) tràn vào dịch chiết, giúp dịch chiết trong, không bị nhớt dính tắc màng lọc.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 147,
+    question: "Nguyên tắc cốt lõi của kỹ thuật chiết Ngấm kiệt (Percolation) liên tục là gì?",
+    options: [
+      "Dung môi mới tiếp xúc với dược liệu cũ; Dung môi cũ tiếp xúc với dược liệu mới",
+      "Dung môi mới luôn tiếp xúc với dược liệu mới",
+      "Ngâm tĩnh dược liệu trong 30 ngày",
+      "Đun sôi dược liệu ở nhiệt độ 200°C"
+    ],
+    correctIndex: 0,
+    explanation: "Dung môi mới (nồng độ chất tan = 0) tiếp xúc dược liệu đã chiết gần kiệt để rút nốt hoạt chất; dung môi đã hòa tan một phần dược chất sẽ tiếp xúc dược liệu mới để tạo dịch chiết đậm đặc nhất.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
+  },
+  {
+    id: 148,
+    question: "Việt Nam xếp thứ mấy trên thế giới về mức độ đa dạng sinh vật và hiện đã thống kê được bao nhiêu loài cây thuốc?",
+    options: [
+      "Xếp thứ 16 trên thế giới; trên 5.000 loài cây thuốc",
+      "Xếp thứ 1 trên thế giới; trên 50.000 loài cây thuốc",
+      "Xếp thứ 80 trên thế giới; khoảng 500 loài cây thuốc",
+      "Xếp thứ 50 trên thế giới; khoảng 1.000 loài cây thuốc"
+    ],
+    correctIndex: 0,
+    explanation: "Việt Nam nằm trong top 16 quốc gia đa dạng sinh học cao nhất thế giới và đã ghi nhận hơn 5.000 loài thực vật làm thuốc.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 149,
+    question: "Hình thức bảo tồn nguồn gen cây thuốc ngay tại môi trường sinh thái tự nhiên nguyên bản (Vườn quốc gia, Khu dự trữ sinh quyển) gọi là:",
+    options: ["Bảo tồn In situ (Tại chỗ)", "Bảo tồn Ex situ (Chuyển chỗ)", "Bảo tồn On farm", "Bảo tồn In vitro"],
+    correctIndex: 0,
+    explanation: "Bảo tồn In situ là bảo tồn nguyên trạng tại môi trường tự nhiên giúp sinh vật tiếp tục tương tác và tiến hóa theo tự nhiên.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Dễ"
+  },
+  {
+    id: 150,
+    question: "Dược lý dân tộc học (Ethnopharmacology) là môn khoa học liên ngành nhằm mục tiêu cốt lõi nào?",
+    options: [
+      "Ghi nhận kinh nghiệm sử dụng cây thuốc của các dân tộc và chứng minh, định danh hoạt chất bằng khoa học hiện đại",
+      "Chỉ thu mua cây thuốc giá rẻ của các dân tộc thiểu số",
+      "Nghiên cứu lai tạo các giống cây đột biến gen vô tính",
+      "Khai tử các phương pháp chữa bệnh dân gian"
+    ],
+    correctIndex: 0,
+    explanation: "Dược lý dân tộc học nghiên cứu ghi nhận tri thức dân gian bản địa, chứng minh tác dụng bằng thực nghiệm và bảo vệ quyền sở hữu trí tuệ của cộng đồng bản địa.",
+    topic: "daicuong",
+    isMidterm: true,
+    difficulty: "Trung bình"
   }
 ];

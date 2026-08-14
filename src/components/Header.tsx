@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { BookOpen, Layers, HelpCircle, Sparkles, BarChart2, Search, GraduationCap, Sun, Moon, Monitor } from 'lucide-react';
+import { 
+  BookOpen, 
+  Layers, 
+  HelpCircle, 
+  Sparkles, 
+  BarChart2, 
+  Search, 
+  GraduationCap, 
+  Sun, 
+  Moon, 
+  Monitor,
+  Check
+} from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats';
-  setActiveTab: (tab: 'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats') => void;
+  activeTab: 'materials' | 'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats';
+  setActiveTab: (tab: 'materials' | 'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats') => void;
   masteredCount: number;
   totalFlashcards: number;
   completedQuizzesCount: number;
@@ -14,117 +26,117 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   setActiveTab,
-  masteredCount,
-  totalFlashcards,
-  completedQuizzesCount,
   themeMode,
   setThemeMode,
 }) => {
   const [showThemeMenu, setShowThemeMenu] = useState(false);
 
+  const navItems = [
+    {
+      id: 'materials',
+      label: 'Giáo Trình',
+      icon: BookOpen,
+      activeColor: 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 border-emerald-600',
+      iconColor: 'text-emerald-500',
+    },
+    {
+      id: 'flashcards',
+      label: 'Flashcards',
+      icon: Layers,
+      activeColor: 'bg-teal-600 text-white shadow-md shadow-teal-600/25 border-teal-600',
+      iconColor: 'text-teal-500',
+    },
+    {
+      id: 'quiz',
+      label: 'Trắc Nghiệm',
+      icon: HelpCircle,
+      activeColor: 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25 border-indigo-600',
+      iconColor: 'text-indigo-500',
+    },
+    {
+      id: 'dictionary',
+      label: 'Tra Cứu',
+      icon: Search,
+      activeColor: 'bg-violet-600 text-white shadow-md shadow-violet-600/25 border-violet-600',
+      iconColor: 'text-violet-500',
+    },
+    {
+      id: 'ai',
+      label: 'Trợ Lý AI',
+      icon: Sparkles,
+      activeColor: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/25 border-amber-500',
+      iconColor: 'text-amber-500',
+    },
+    {
+      id: 'stats',
+      label: 'Thống Kê',
+      icon: BarChart2,
+      activeColor: 'bg-slate-800 dark:bg-slate-700 text-white shadow-md border-slate-800',
+      iconColor: 'text-slate-500',
+    },
+  ] as const;
+
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 shadow-xs transition-colors">
+    <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-40 shadow-2xs transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Brand Logo & Title */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('flashcards')}>
-            <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white shadow-sm shadow-emerald-500/20">
-              <GraduationCap className="w-5 h-5" />
+        <div className="flex items-center justify-between h-16 gap-4">
+          
+          {/* Left Brand Logo & Title */}
+          <div 
+            className="flex items-center space-x-3 cursor-pointer group shrink-0" 
+            onClick={() => setActiveTab('materials')}
+            title="Về màn hình chính Giáo Trình Dược Liệu"
+          >
+            <div className="w-10 h-10 bg-gradient-to-tr from-emerald-600 via-teal-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-md shadow-emerald-600/25 ring-2 ring-emerald-500/15 group-hover:scale-105 transition-transform duration-200">
+              <GraduationCap className="w-5 h-5 stroke-[2.2]" />
             </div>
-            <div>
-              <h1 className="font-bold text-lg leading-tight tracking-tight text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
-                Học Dược Cùng <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">Ngọt</span>
-              </h1>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Ôn Tập Dược Liệu Học & Trắc Nghiệm</p>
+            
+            <div className="flex flex-col justify-center">
+              <div className="flex items-center gap-1.5">
+                <span className="font-black text-sm sm:text-base tracking-tight text-slate-800 dark:text-slate-100">
+                  Học Dược
+                </span>
+                <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent font-black text-sm sm:text-base">
+                  Cùng Ngọt
+                </span>
+              </div>
+              <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500">
+                Ôn thi trắc nghiệm & Giáo trình chuẩn khoa dược
+              </span>
             </div>
           </div>
 
-          {/* Quick Stats Badges */}
-          <div className="hidden lg:flex items-center space-x-3 text-xs font-medium">
-            <div className="bg-blue-50 dark:bg-blue-950/50 px-3 py-1.5 rounded-full border border-blue-100 dark:border-blue-900/60 text-blue-900 dark:text-blue-200 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-              Đã thuộc: <span className="text-blue-700 dark:text-blue-300 font-bold">{masteredCount}/{totalFlashcards}</span> thẻ
-            </div>
-            <div className="bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-full border border-emerald-100 dark:border-emerald-900/60 text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400"></span>
-              Đã thi: <span className="text-emerald-700 dark:text-emerald-300 font-bold">{completedQuizzesCount}</span> bài
-            </div>
-          </div>
+          {/* Right Navigation Tabs & Theme Controls */}
+          <div className="flex items-center space-x-1.5 sm:space-x-2">
+            {/* Nav Tabs */}
+            <nav className="flex items-center space-x-1 bg-slate-100/70 dark:bg-slate-800/60 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-700/60">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
 
-          {/* Right Area: Navigation Tabs & Theme Selector */}
-          <div className="flex items-center space-x-2">
-            <nav className="flex items-center space-x-1">
-              <button
-                id="tab-flashcards"
-                onClick={() => setActiveTab('flashcards')}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'flashcards'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900 font-bold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <Layers className="w-4 h-4" />
-                <span className="hidden sm:inline">Flashcards</span>
-              </button>
-
-              <button
-                id="tab-quiz"
-                onClick={() => setActiveTab('quiz')}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'quiz'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900 font-bold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <HelpCircle className="w-4 h-4" />
-                <span className="hidden sm:inline">Trắc Nghiệm</span>
-              </button>
-
-              <button
-                id="tab-dictionary"
-                onClick={() => setActiveTab('dictionary')}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'dictionary'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900 font-bold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <Search className="w-4 h-4" />
-                <span className="hidden sm:inline">Tra Cứu</span>
-              </button>
-
-              <button
-                id="tab-ai"
-                onClick={() => setActiveTab('ai')}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'ai'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900 font-bold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <span className="hidden sm:inline">Trợ Lý AI</span>
-              </button>
-
-              <button
-                id="tab-stats"
-                onClick={() => setActiveTab('stats')}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'stats'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900 font-bold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <BarChart2 className="w-4 h-4" />
-                <span className="hidden sm:inline">Thống Kê</span>
-              </button>
+                return (
+                  <button
+                    key={item.id}
+                    id={`tab-${item.id}`}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? `${item.activeColor} border scale-100`
+                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60 border border-transparent'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : item.iconColor}`} />
+                    <span className="hidden md:inline">{item.label}</span>
+                  </button>
+                );
+              })}
             </nav>
 
-            {/* Theme Mode Dropdown / Toggle Button */}
+            {/* Theme Mode Selector Dropdown */}
             <div className="relative pl-1 border-l border-slate-200 dark:border-slate-800">
               <button
                 onClick={() => setShowThemeMenu(!showThemeMenu)}
-                className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer flex items-center gap-1.5"
+                className="p-2 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer flex items-center justify-center border border-slate-200/60 dark:border-slate-700/60"
                 title="Thay đổi giao diện Sáng / Tối / Hệ thống"
               >
                 {themeMode === 'light' && <Sun className="w-4 h-4 text-amber-500" />}
@@ -133,57 +145,71 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
 
               {showThemeMenu && (
-                <div className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-1.5 z-50 text-xs space-y-0.5">
-                  <div className="px-2.5 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-700 mb-1">
-                    Giao Diện
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowThemeMenu(false)}></div>
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-1.5 z-50 text-xs space-y-1 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="px-3 py-1.5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider border-b border-slate-100 dark:border-slate-700/80 mb-1 flex items-center justify-between">
+                      <span>Chế Độ Giao Diện</span>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setThemeMode('light');
+                        setShowThemeMenu(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition cursor-pointer ${
+                        themeMode === 'light'
+                          ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-bold border border-amber-200 dark:border-amber-900'
+                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Sun className="w-4 h-4 text-amber-500" />
+                        <span>Giao Diện Sáng</span>
+                      </div>
+                      {themeMode === 'light' && <Check className="w-3.5 h-3.5 text-amber-600" />}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setThemeMode('dark');
+                        setShowThemeMenu(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition cursor-pointer ${
+                        themeMode === 'dark'
+                          ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-200 dark:border-indigo-900'
+                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Moon className="w-4 h-4 text-indigo-400" />
+                        <span>Giao Diện Tối</span>
+                      </div>
+                      {themeMode === 'dark' && <Check className="w-3.5 h-3.5 text-indigo-400" />}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setThemeMode('system');
+                        setShowThemeMenu(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition cursor-pointer ${
+                        themeMode === 'system'
+                          ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-900'
+                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Monitor className="w-4 h-4 text-blue-500" />
+                        <span>Theo Hệ Thống</span>
+                      </div>
+                      {themeMode === 'system' && <Check className="w-3.5 h-3.5 text-blue-500" />}
+                    </button>
                   </div>
-                  <button
-                    onClick={() => {
-                      setThemeMode('light');
-                      setShowThemeMenu(false);
-                    }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-left transition cursor-pointer ${
-                      themeMode === 'light'
-                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    <Sun className="w-4 h-4 text-amber-500" />
-                    <span>Sáng (Light)</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setThemeMode('dark');
-                      setShowThemeMenu(false);
-                    }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-left transition cursor-pointer ${
-                      themeMode === 'dark'
-                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    <Moon className="w-4 h-4 text-indigo-400" />
-                    <span>Tối (Dark)</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setThemeMode('system');
-                      setShowThemeMenu(false);
-                    }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-left transition cursor-pointer ${
-                      themeMode === 'system'
-                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    <Monitor className="w-4 h-4 text-blue-500" />
-                    <span>Theo Hệ Thống</span>
-                  </button>
-                </div>
+                </>
               )}
             </div>
+
           </div>
         </div>
       </div>

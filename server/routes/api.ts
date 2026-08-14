@@ -35,12 +35,15 @@ apiRouter.post("/chat", async (req: Request, res: Response) => {
     });
 
     const SOURCE_NAMES: Record<string, string> = {
-      all: "Toàn bộ chương trình Dược Liệu Học",
-      daicuong: "Phần Đại Cương & Lịch Sử Y Dược Liệu",
+      all: "Toàn bộ chương trình Dược Liệu Học & Giáo trình Đại Cương",
+      daicuong: "Giáo Trình Đại Cương Dược Liệu Học (25 trang: Định nghĩa, Lịch sử Y Dược, Thu hái, Sắc ký, Chiết xuất, Tài nguyên & Bảo tồn)",
+      d2022: "Đề Thi Giữa Kỳ Dược Liệu 1 Lớp D2022 (60 câu / 30 phút)",
+      deso2: "Đề Kiểm Tra Giữa Kỳ Số 2 (60 câu / 30 phút)",
+      deso3: "Bộ Đề Mở Rộng Giữa Kỳ Số 3 (80 câu / 30 phút)",
       midterm: "Bộ Đề Thi Giữa Kỳ 60 Câu / 30 Phút",
-      "harvest-process": "Phần Thu Hái, Chế Biến & Bảo Quản Dược Liệu",
-      "analysis-chromatography": "Phần Sắc Ký (TLC, HPLC) & Kiểm Nghiệm Dược Liệu",
-      "compounds-resources": "Phần Hoạt Chất (Coumarin, Pectin...) & Tài Nguyên Dược Liệu",
+      "harvest-process": "Phần Thu Hái, Chiết Xuất, Thẩm Tích & Tiêu Chuẩn GACP",
+      "analysis-chromatography": "Phần Sắc Ký (HPLC, TLC, CCC) & Quang Phổ (UV, IR, NMR, MS)",
+      "compounds-resources": "Phần Hoạt Chất (Coumarin, Glycosid...) & Tài Nguyên Cây Thuốc, Bảo Tồn CITES",
     };
 
     const systemPrompt =

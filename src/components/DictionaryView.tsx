@@ -5,7 +5,6 @@ import {
   Search, 
   BookMarked, 
   Filter, 
-  Volume2, 
   Bookmark, 
   Copy, 
   Check, 
@@ -59,18 +58,6 @@ export const DictionaryView: React.FC<DictionaryViewProps> = ({ selectedSource =
     setBookmarkedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
-  };
-
-  // Handle TTS text to speech
-  const speakText = (text: string, e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'vi-VN';
-      utterance.rate = 0.95;
-      window.speechSynthesis.speak(utterance);
-    }
   };
 
   // Copy text to clipboard
@@ -269,13 +256,6 @@ export const DictionaryView: React.FC<DictionaryViewProps> = ({ selectedSource =
                     {/* Actions */}
                     <div className="flex items-center space-x-1 shrink-0">
                       <button
-                        onClick={(e) => speakText(`${item.term}. ${item.definition}`, e)}
-                        className="p-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/80 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition cursor-pointer"
-                        title="Đọc nội dung"
-                      >
-                        <Volume2 className="w-4 h-4" />
-                      </button>
-                      <button
                         onClick={(e) => copyToClipboard(item, e)}
                         className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer"
                         title="Sao chép nội dung"
@@ -357,15 +337,7 @@ export const DictionaryView: React.FC<DictionaryViewProps> = ({ selectedSource =
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
-              <button
-                onClick={(e) => speakText(`${selectedItemForModal.term}. ${selectedItemForModal.details}`, e)}
-                className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer"
-              >
-                <Volume2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                Đọc Toàn Bộ
-              </button>
-
+            <div className="flex items-center justify-end pt-4 border-t border-slate-100 dark:border-slate-800">
               <button
                 onClick={() => setSelectedItemForModal(null)}
                 className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition cursor-pointer"

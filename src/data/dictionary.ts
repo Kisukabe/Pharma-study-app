@@ -383,5 +383,163 @@ export const DICTIONARY_ITEMS: DictItem[] = [
       'CITES Phụ lục I cấm hoàn toàn thương mại quốc tế các loài dược liệu cực kỳ nguy cấp.'
     ],
     relatedTerms: ['Sách Đỏ', 'GACP-WHO', 'Tài nguyên sinh học']
+  },
+
+  // =========================================================================
+  // --- CÁC THUẬT NGỮ GIÁO TRÌNH ĐẠI CƯƠNG DƯỢC LIỆU HỌC (DCQ2022) ---
+  // =========================================================================
+  {
+    id: 'dict_dc_seydler_schmidt',
+    term: 'J.A. Schmidt & C.A. Seydler',
+    latinOrAlt: '1811 (Lehrbuch der Materia Medica) & 1815 (Analecta Pharmacognostica)',
+    topic: 'daicuong',
+    category: 'Lịch sử Y Dược Thế giới',
+    definition: 'Hai nhà khoa học đầu tiên đề xuất và hệ thống hóa thuật ngữ Pharmacognosy trên thế giới.',
+    details: 'J.A. Schmidt (1811) dùng từ "Pharmacognosis" trong sách giáo khoa Materia Medica tại Vienna. Sau đó C.A. Seydler (1815) dùng danh xưng "Analecta Pharmacognostica" trong luận án tại Halle (Đức), chính thức khai sinh tên gọi môn học.',
+    keyPoints: [
+      'Gốc từ Hy Lạp: Pharmakon (Thuốc) + Gnosis (Tri thức / Sự hiểu biết).',
+      'Đánh dấu bước ngoặt phân định ranh giới chuyên ngành Dược liệu học.'
+    ],
+    relatedTerms: ['Pharmacognosy', 'Physiopharmacognosy', 'Wasicki']
+  },
+  {
+    id: 'dict_dc_physio',
+    term: 'Physiopharmacognosy (Wasicki)',
+    latinOrAlt: 'Tự nhiên học dược liệu (Physio = Thiên nhiên)',
+    topic: 'daicuong',
+    category: 'Khái niệm & Định nghĩa',
+    definition: 'Thuật ngữ do Wasicki đề xuất chỉ môn học nghiên cứu về các loại thuốc có nguồn gốc từ tự nhiên.',
+    details: 'Wasicki đề xuất danh xưng này để nhấn mạnh bản chất của môn học là nghiên cứu hoạt chất sinh học tự nhiên, phân biệt rạch ròi với ngành Hóa dược (nghiên cứu phân tử tổng hợp nhân tạo mới).',
+    keyPoints: [
+      'Được coi là danh xưng chính xác nhất về mặt học thuật của Dược liệu học.',
+      'Bao hàm cả thực vật, động vật, vi sinh vật và sinh vật biển.'
+    ],
+    relatedTerms: ['Pharmacognosy', 'Pharmaceutisch Biologie']
+  },
+  {
+    id: 'dict_dc_quinta_essentia',
+    term: 'Quinta Essentia (Chất tinh túy - Paracelsus)',
+    latinOrAlt: 'Học thuyết Paracelsus (1493 - 1541)',
+    topic: 'daicuong',
+    category: 'Lịch sử Y Dược Thế giới',
+    definition: 'Khái niệm tiền đề của Hoạt chất (Active Principle) trong cây thuốc do Paracelsus đề xướng.',
+    details: 'Paracelsus khẳng định trong một cây thuốc chỉ có một lượng rất nhỏ là chất tinh túy mang tác dụng trị liệu ("Quinta essentia"), phần còn lại là tạp chất. Ông cổ xúy việc chiết xuất hoạt chất và dùng độc vị (1 bệnh - 1 thuốc) thay vì bài thuốc hỗn tạp.',
+    keyPoints: [
+      'Đặt nền móng cho Hóa Dược và công nghệ chiết xuất hoạt chất tinh khiết.',
+      'Được Sertürner chứng minh bằng thực nghiệm qua việc phân lập Morphine năm 1806.'
+    ],
+    relatedTerms: ['Paracelsus', 'Morphine', 'Sertürner']
+  },
+  {
+    id: 'dict_dc_serturner',
+    term: 'Friedrich Sertürner (1806)',
+    latinOrAlt: 'Dược sĩ người Đức (1783 – 1841)',
+    topic: 'daicuong',
+    category: 'Lịch sử Y Dược Thế giới',
+    definition: 'Nhà khoa học đầu tiên phân lập thành công Morphine tinh khiết từ nhựa cây thuốc phiện (*Papaver somniferum*).',
+    details: 'Thành tựu năm 1806 của Sertürner là mốc son chói lọi mở đầu kỷ nguyên phân lập các hợp chất tự nhiên có tính kiềm (Alkaloid), khai sinh ngành Hóa Dược và chiết xuất hiện đại.',
+    keyPoints: [
+      'Chứng minh trọn vẹn học thuyết Quinta essentia của Paracelsus.',
+      'Mở đường phân lập Quinine (1820), Strychnine (1818), Caffeine (1819), Atropine (1831).'
+    ],
+    relatedTerms: ['Morphine', 'Quinta Essentia', 'Alkaloid']
+  },
+  {
+    id: 'dict_dc_cao_chiet',
+    term: 'Cao chiết toàn phần & Cao tinh chế',
+    latinOrAlt: 'Crude Extract vs Standardized Purified Extract',
+    topic: 'daicuong',
+    category: 'Chiết xuất & Chế phẩm',
+    definition: 'Các cấp độ tinh sạch của sản phẩm chiết xuất từ dược liệu thô.',
+    details: 'Cao toàn phần chứa 40-60% dược chất lẫn tạp tự nhiên. Cao tinh chế (hoạt chất toàn phần) đã loại tạp đại phân tử, chuẩn hóa nồng độ nhóm hoạt chất chính (như cao Bạch quả Ginkgo biloba).',
+    keyPoints: [
+      'Cao tinh chế mang lại hiệu ứng hiệp đồng sinh học, giảm độc tính và tác dụng êm dịu hơn đơn chất tinh khiết.',
+      'Là xu hướng sản xuất thuốc dược liệu chuẩn hóa hàng đầu hiện nay.'
+    ],
+    relatedTerms: ['Hoạt chất tinh khiết', 'Ginkgo biloba', 'Chiết xuất']
+  },
+  {
+    id: 'dict_dc_fingerprint',
+    term: 'Sắc ký Điểm chỉ (Chromatographic Fingerprint)',
+    latinOrAlt: 'Bản đồ sắc ký đồ HPLC / TLC chuẩn',
+    topic: 'analysis-chromatography',
+    category: 'Sắc ký & Kiểm nghiệm',
+    definition: 'Kỹ thuật so sánh toàn bộ phổ sắc ký phức tạp của mẫu thử với mẫu dược liệu đối chiếu chuẩn.',
+    details: 'Khi không có chất chuẩn đơn lẻ hoặc đối với bài thuốc đông y đa thành phần, HPLC fingerprint cung cấp "dấu vân tay hóa học" toàn diện giúp định danh chính xác loài, nguồn gốc địa lý và phát hiện giả mạo.',
+    keyPoints: [
+      'Ứng dụng tiêu biểu: Phân biệt Sâm Ngọc Linh thật với Tam thất hoang / Sâm Tây Bắc.',
+      'Tiêu chuẩn bắt buộc trong kiểm tra chất lượng dược liệu quốc tế.'
+    ],
+    relatedTerms: ['HPLC', 'Định danh dược liệu', 'Sâm Ngọc Linh']
+  },
+  {
+    id: 'dict_dc_ccc',
+    term: 'Sắc ký Phân bố Ngược dòng (CCC)',
+    latinOrAlt: 'Counter-Current Chromatography (Lỏng - Lỏng)',
+    topic: 'analysis-chromatography',
+    category: 'Sắc ký & Kiểm nghiệm',
+    definition: 'Kỹ thuật sắc ký điều chế mà cả pha tĩnh và pha động đều ở trạng thái lỏng không hòa lẫn.',
+    details: 'Khác với sắc ký cột dùng Silica gel, CCC không dùng chất mang rắn nên tránh được hiện tượng hấp phụ không thuận nghịch, không làm biến tính hoạt chất, hiệu suất thu hồi gần 100% và chi phí dung môi rất rẻ.',
+    keyPoints: [
+      'Chuyên dùng trong phân lập và điều chế hoạt chất tự nhiên độ sạch cao.',
+      'Là phương pháp chiết tách phân đoạn tinh sạch kinh tế nhất trong nghiên cứu dược liệu.'
+    ],
+    relatedTerms: ['Sắc ký điều chế', 'HPLC', 'Phân lập']
+  },
+  {
+    id: 'dict_dc_plasmodesmata',
+    term: 'Kênh Bào Tương (Plasmodesmata)',
+    latinOrAlt: 'Cầu sinh chất liên thông tế bào thực vật',
+    topic: 'harvest-process',
+    category: 'Chiết xuất & Tế bào',
+    definition: 'Các vi kênh xuyên qua vách tế bào cellulose liên kết tế bào chất giữa các tế bào thực vật kề nhau.',
+    details: 'Trong quá trình chiết xuất và thẩm tích, hoạt chất trong không bào muốn đi ra ngoài dung môi phải di chuyển xuyên qua các kênh bào tương này. Kích thước kênh quyết định tốc độ khuếch tán của phân tử chất tan.',
+    keyPoints: [
+      'Kênh càng nhỏ, vách tế bào càng dày thì quá trình chiết càng chậm.',
+      'Là cấu trúc giải thích tại sao tế bào nguyên vẹn vẫn có thể giải phóng hoạt chất ra ngoài.'
+    ],
+    relatedTerms: ['Thẩm tích', 'Chiết xuất', 'Không bào']
+  },
+  {
+    id: 'dict_dc_percolation',
+    term: 'Kỹ thuật Ngấm Kiệt (Percolation)',
+    latinOrAlt: 'Chiết động liên tục ngược dòng',
+    topic: 'harvest-process',
+    category: 'Chiết xuất & Chế phẩm',
+    definition: 'Phương pháp chiết xuất động liên tục bằng cách cho dung môi chảy qua khối dược liệu trong bình ngấm kiệt.',
+    details: 'Vận hành theo nguyên tắc vàng: Dung môi mới tiếp xúc với dược liệu cũ (đã chiết gần hết); Dung môi cũ tiếp xúc với dược liệu mới. Nhờ đó luôn duy trì gradient nồng độ chênh lệch tối đa, tận thu kiệt hoạt chất và tiết kiệm dung môi.',
+    keyPoints: [
+      'Ưu việt hơn hẳn phương pháp ngâm tĩnh gián đoạn.',
+      'Dịch chiết đầu rất đậm đặc, giảm năng lượng cô đặc dung môi.'
+    ],
+    relatedTerms: ['Chiết ngâm', 'Dung môi', 'Dịch chiết']
+  },
+  {
+    id: 'dict_dc_in_situ_ex_situ',
+    term: 'Bảo tồn In Situ & Ex Situ',
+    latinOrAlt: 'Bảo tồn tại chỗ (In situ) & Bảo tồn chuyển chỗ (Ex situ)',
+    topic: 'compounds-resources',
+    category: 'Tài nguyên & Bảo tồn',
+    definition: 'Hai chiến lược bảo tồn đa dạng sinh học và nguồn gen cây thuốc cốt lõi.',
+    details: 'In situ bảo tồn các loài ngay tại môi trường tự nhiên (Vườn quốc gia, Khu dự trữ sinh quyển) giúp duy trì sự tiến hóa tự nhiên. Ex situ bảo tồn tại Vườn thực vật, Ngân hàng gen, Ngân hàng hạt giống giúp dễ quản lý và nhân giống.',
+    keyPoints: [
+      'Bảo tồn On farm: Hình thức bảo tồn bổ trợ tại trang trại đồng ruộng nông hộ.',
+      'Việt Nam có >5.000 loài cây thuốc cần được ưu tiên phân loại bảo tồn.'
+    ],
+    relatedTerms: ['Đa dạng sinh học', 'Sách Đỏ', 'CITES']
+  },
+  {
+    id: 'dict_dc_ethnopharmacology',
+    term: 'Dược lý Dân tộc học (Ethnopharmacology)',
+    latinOrAlt: 'Khoa học liên ngành Y học dân gian & Dược lý hiện đại',
+    topic: 'compounds-resources',
+    category: 'Tài nguyên & Bảo tồn',
+    definition: 'Môn khoa học liên ngành nghiên cứu các kinh nghiệm sử dụng cây cỏ chữa bệnh của các cộng đồng dân tộc bản địa.',
+    details: 'Ethnopharmacology khảo sát, thu thập bài thuốc dân gian, sau đó phân lập định danh hoạt chất và chứng minh tác dụng bằng thực nghiệm lâm sàng hiện đại. Đi kèm với tuyên ngôn Belem và Manila bảo vệ quyền sở hữu trí tuệ của người bản địa.',
+    keyPoints: [
+      'Ví dụ điển hình: Bài thuốc tắm sau sinh của phụ nữ người Dao đỏ, cây Bằng đắng chữa lành vết thương.',
+      'Ngăn chặn nạn cướp sinh học (Biopiracy) của các tập đoàn đa quốc gia.'
+    ],
+    relatedTerms: ['Biopiracy', 'Tuyên ngôn Belem', 'Kinh nghiệm dân gian']
   }
 ];

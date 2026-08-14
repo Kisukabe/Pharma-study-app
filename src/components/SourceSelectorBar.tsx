@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Topic } from '../types';
+import { FLASHCARDS } from '../data/flashcards';
 import { 
   BookOpen, 
   GraduationCap, 
@@ -9,12 +10,11 @@ import {
   Leaf, 
   Layers, 
   FileText, 
-  ChevronLeft, 
-  ChevronRight, 
-  ListFilter, 
-  LayoutList, 
-  SlidersHorizontal,
-  CheckCircle2
+  CheckCircle2,
+  Menu,
+  X,
+  ChevronRight,
+  Filter
 } from 'lucide-react';
 
 interface SourceSelectorBarProps {
@@ -30,221 +30,337 @@ export const SourceSelectorBar: React.FC<SourceSelectorBarProps> = ({
   onSelectSource,
   activeTab,
 }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [viewMode, setViewMode] = useState<'slider' | 'vertical'>('slider');
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -260 : 260;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  // Filter topics based strictly on active tab context
+  // Flashcards: ONLY Giáo Trình (daicuong) & Chuyên Đề (harvest-process, analysis-chromatography, compounds-resources)
+  // Quiz: ONLY Đề Thi (d2022, deso2, deso3) & Bài Thi Giáo Trình (daicuong)
+  const contextualTopics = useMemo(() => {
+    if (activeTab === 'flashcards') {
+      return topics.filter(
+        (t) => t.id === 'all' || t.id === 'daicuong' || ['harvest-process', 'analysis-chromatography', 'compounds-resources'].includes(t.id)
+      );
     }
+    if (activeTab === 'quiz') {
+      return topics.filter(
+        (t) => t.id === 'all' || ['d2022', 'deso2', 'deso3', 'daicuong'].includes(t.id)
+      );
+    }
+    return topics;
+  }, [topics, activeTab]);
+
+  // Reset selectedSource if invalid for current activeTab
+  useEffect(() => {
+    const isSourceValid = contextualTopics.some((t) => t.id === selectedSource);
+    if (!isSourceValid) {
+      onSelectSource('all');
+    }
+  }, [activeTab, selectedSource, contextualTopics, onSelectSource]);
+
+  // Filtered topics based on Category Filter inside Drawer
+  const filteredTopics = useMemo(() => {
+    if (categoryFilter === 'textbook') {
+      return contextualTopics.filter((t) => t.id === 'all' || t.id === 'daicuong');
+    }
+    if (categoryFilter === 'exams') {
+      return contextualTopics.filter((t) => t.id === 'all' || ['d2022', 'deso2', 'deso3'].includes(t.id));
+    }
+    if (categoryFilter === 'topics') {
+      return contextualTopics.filter(
+        (t) => t.id === 'all' || ['harvest-process', 'analysis-chromatography', 'compounds-resources'].includes(t.id)
+      );
+    }
+    return contextualTopics;
+  }, [contextualTopics, categoryFilter]);
+
+  const selectedTopicObj = useMemo(() => {
+    return contextualTopics.find((t) => t.id === selectedSource) || contextualTopics[0] || topics[0];
+  }, [contextualTopics, selectedSource, topics]);
+
+  const getTopicTitle = (topic: Topic) => {
+    if (topic.id === 'all') {
+      if (activeTab === 'flashcards') return 'Tất Cả Thẻ Flashcards';
+      if (activeTab === 'quiz') return 'Tất Cả Bộ Đề Thi';
+      return 'Tất Cả Nguồn';
+    }
+    return topic.title;
   };
 
-  const getIcon = (id: string) => {
+  const getTopicDescription = (topic: Topic) => {
+    if (topic.id === 'all') {
+      if (activeTab === 'flashcards') return `Toàn bộ ${FLASHCARDS.length} thẻ flashcards từ Giáo trình & Các chuyên đề`;
+      if (activeTab === 'quiz') return 'Toàn bộ 160+ câu hỏi trắc nghiệm từ các bộ đề thi';
+      return topic.description;
+    }
+    return topic.description;
+  };
+
+  const getIcon = (id: string, className = 'w-4 h-4') => {
     switch (id) {
-      case 'd2022':
-        return <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" />;
-      case 'deso2':
-        return <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />;
-      case 'deso3':
-        return <Layers className="w-4 h-4 text-amber-600 dark:text-amber-400" />;
       case 'daicuong':
-        return <GraduationCap className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />;
+        return <GraduationCap className={`${className} text-emerald-600 dark:text-emerald-400`} />;
+      case 'd2022':
+        return <Award className={`${className} text-blue-600 dark:text-blue-400`} />;
+      case 'deso2':
+        return <FileText className={`${className} text-indigo-600 dark:text-indigo-400`} />;
+      case 'deso3':
+        return <Layers className={`${className} text-amber-600 dark:text-amber-400`} />;
       case 'harvest-process':
-        return <Sprout className="w-4 h-4 text-green-600 dark:text-green-400" />;
+        return <Sprout className={`${className} text-green-600 dark:text-green-400`} />;
       case 'analysis-chromatography':
-        return <FlaskConical className="w-4 h-4 text-purple-600 dark:text-purple-400" />;
+        return <FlaskConical className={`${className} text-purple-600 dark:text-purple-400`} />;
       case 'compounds-resources':
-        return <Leaf className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
+        return <Leaf className={`${className} text-teal-600 dark:text-teal-400`} />;
       default:
-        return <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />;
+        return <BookOpen className={`${className} text-blue-600 dark:text-blue-400`} />;
     }
   };
 
-  const getBadgeColor = (id: string, isSelected: boolean) => {
-    if (!isSelected) {
-      return 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700';
+  const getItemCountBadge = (topic: Topic, isSelected: boolean) => {
+    let countText = '';
+    if (activeTab === 'quiz') {
+      countText = `${topic.questionCount} câu`;
+    } else {
+      const cardCount = topic.id === 'all'
+        ? FLASHCARDS.length
+        : FLASHCARDS.filter((c) => c.topic === topic.id).length;
+      countText = `${cardCount} thẻ`;
     }
-    switch (id) {
-      case 'd2022':
-        return 'bg-blue-600 text-white font-bold border-blue-600 shadow-sm';
-      case 'deso2':
-        return 'bg-indigo-600 text-white font-bold border-indigo-600 shadow-sm';
-      case 'deso3':
-        return 'bg-amber-600 text-white font-bold border-amber-600 shadow-sm';
-      case 'daicuong':
-        return 'bg-emerald-600 text-white font-bold border-emerald-600 shadow-sm';
-      case 'harvest-process':
-        return 'bg-green-700 text-white font-bold border-green-700 shadow-sm';
-      case 'analysis-chromatography':
-        return 'bg-purple-600 text-white font-bold border-purple-600 shadow-sm';
-      case 'compounds-resources':
-        return 'bg-teal-600 text-white font-bold border-teal-600 shadow-sm';
-      default:
-        return 'bg-slate-800 dark:bg-slate-700 text-white font-bold border-slate-800 shadow-sm';
-    }
+
+    return (
+      <span
+        className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0 ${
+          isSelected
+            ? 'bg-white/20 text-white backdrop-blur-md'
+            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+        }`}
+      >
+        {countText}
+      </span>
+    );
   };
 
-  const selectedTopicObj = topics.find((t) => t.id === selectedSource) || topics[0];
+  const getBarTitle = () => {
+    if (activeTab === 'flashcards') return 'Nguồn Flashcard';
+    if (activeTab === 'quiz') return 'Bộ Đề Thi Trắc Nghiệm';
+    return 'Nguồn Học Tập';
+  };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-16 z-30 shadow-2xs py-2.5 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
-        {/* Header Control Row */}
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center space-x-2 shrink-0">
-            <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></div>
-            <span className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              Chọn Nguồn Bộ Đề:
+    <>
+      {/* Top Sticky Bar */}
+      <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-16 z-30 py-2.5 transition-colors shadow-2xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+          {/* Hamburger Menu 3-gạch Button */}
+          <button
+            onClick={() => setIsDrawerOpen(true)}
+            className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center gap-2 transition cursor-pointer shadow-sm shadow-emerald-600/20 active:scale-95 shrink-0"
+            title="Bấm nút 3 gạch ngang để mở cột dọc chọn nguồn"
+          >
+            <Menu className="w-4 h-4 stroke-[2.5]" />
+            <span>{getBarTitle()}</span>
+            <span className="bg-white/20 text-white px-1.5 py-0.2 rounded-full text-[10px] font-black">
+              {contextualTopics.length}
             </span>
-          </div>
+          </button>
 
-          {/* Toggle Slider vs Vertical List Mode */}
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setViewMode(viewMode === 'slider' ? 'vertical' : 'slider')}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
-              title="Chuyển đổi giao diện chọn dạng cuộn / dạng danh sách hàng dọc"
-            >
-              {viewMode === 'slider' ? (
-                <>
-                  <LayoutList className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                  <span>Xếp Hàng Dọc</span>
-                </>
-              ) : (
-                <>
-                  <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                  <span>Thanh Cuộn Ngang</span>
-                </>
-              )}
-            </button>
+          {/* Active Source Pill Display */}
+          <div className="flex items-center space-x-2 text-xs overflow-hidden">
+            <div className="hidden sm:flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Đang chọn:</span>
+            </div>
+            
+            <div className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 px-3 py-1.5 rounded-xl flex items-center gap-2 truncate">
+              <span className="shrink-0">{getIcon(selectedTopicObj.id, 'w-3.5 h-3.5')}</span>
+              <span className="font-bold text-slate-800 dark:text-slate-100 truncate text-xs">
+                {getTopicTitle(selectedTopicObj)}
+              </span>
+              {getItemCountBadge(selectedTopicObj, false)}
+            </div>
+
+            {selectedSource !== 'all' && (
+              <button
+                onClick={() => onSelectSource('all')}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition cursor-pointer shrink-0"
+                title="Đặt lại về Tất cả nguồn"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
+      </div>
 
-        {/* View Mode 1: Horizontal Slider with Scroll Buttons & Custom Scrollbar */}
-        {viewMode === 'slider' && (
-          <div className="relative group flex items-center">
-            {/* Scroll Left Button */}
-            <button
-              onClick={() => scroll('left')}
-              className="hidden sm:flex items-center justify-center p-1.5 rounded-l-xl bg-slate-100/90 dark:bg-slate-800/90 hover:bg-blue-600 hover:text-white text-slate-600 dark:text-slate-300 transition shrink-0 z-10 cursor-pointer border border-r-0 border-slate-200 dark:border-slate-700 shadow-2xs"
-              title="Cuộn sang trái"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+      {/* Slide-out Vertical Column Drawer */}
+      {isDrawerOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsDrawerOpen(false)}
+          ></div>
 
-            {/* Scrollable Container with Custom Scrollbar */}
-            <div
-              ref={scrollContainerRef}
-              className="flex items-center space-x-2 overflow-x-auto custom-scrollbar py-2 px-1 scroll-smooth w-full"
-            >
-              {topics.map((topic) => {
-                const isSelected = selectedSource === topic.id;
-                return (
-                  <button
-                    key={topic.id}
-                    onClick={() => onSelectSource(topic.id)}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs border transition-all whitespace-nowrap cursor-pointer shrink-0 ${getBadgeColor(
-                      topic.id,
-                      isSelected
-                    )}`}
-                  >
-                    <span className={isSelected ? 'text-white' : ''}>{getIcon(topic.id)}</span>
-                    <span>{topic.title}</span>
-                    {topic.id !== 'all' && (
-                      <span
-                        className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ml-0.5 ${
-                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300'
-                        }`}
-                      >
-                        {activeTab === 'quiz' ? `${topic.questionCount} câu` : `${topic.flashcardCount} thẻ`}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+          {/* Vertical Column Drawer Container */}
+          <aside className="relative w-full max-w-sm bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 h-full flex flex-col shadow-2xl z-10 animate-in slide-in-from-left duration-200">
+            {/* Drawer Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/80">
+              <div className="flex items-center space-x-2.5">
+                <div className="p-2 rounded-xl bg-emerald-600 text-white">
+                  <Menu className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-slate-800 dark:text-slate-100">
+                    Cột Dọc {getBarTitle()}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                    {activeTab === 'flashcards'
+                      ? 'Chỉ gồm nguồn Giáo Trình & Các Chuyên Đề'
+                      : 'Chỉ gồm các Bộ Đề Thi Trắc Nghiệm'}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsDrawerOpen(false)}
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition cursor-pointer"
+                title="Đóng cột dọc"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Scroll Right Button */}
-            <button
-              onClick={() => scroll('right')}
-              className="hidden sm:flex items-center justify-center p-1.5 rounded-r-xl bg-slate-100/90 dark:bg-slate-800/90 hover:bg-blue-600 hover:text-white text-slate-600 dark:text-slate-300 transition shrink-0 z-10 cursor-pointer border border-l-0 border-slate-200 dark:border-slate-700 shadow-2xs"
-              title="Cuộn sang phản"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+            {/* Contextual Category Filter Tabs inside Vertical Drawer */}
+            <div className="p-3 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+              <div className="flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-[11px] font-bold">
+                <button
+                  onClick={() => setCategoryFilter('all')}
+                  className={`flex-1 py-1.5 rounded-lg transition text-center cursor-pointer ${
+                    categoryFilter === 'all'
+                      ? 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 shadow-2xs'
+                      : 'text-slate-500 dark:text-slate-400'
+                  }`}
+                >
+                  Tất Cả
+                </button>
 
-        {/* View Mode 2: Vertical List View (Các phần chọn được xếp theo hàng dọc) */}
-        {viewMode === 'vertical' && (
-          <div className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-3 my-2 space-y-2 max-h-72 overflow-y-auto custom-scrollbar">
-            <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>Danh Sách Tất Cả Bộ Đề Thi (Xếp Theo Hàng Dọc):</span>
-              <span className="text-blue-600 dark:text-blue-400">{topics.length} nguồn</span>
+                {activeTab === 'quiz' ? (
+                  <>
+                    <button
+                      onClick={() => setCategoryFilter('exams')}
+                      className={`flex-1 py-1.5 rounded-lg transition text-center cursor-pointer ${
+                        categoryFilter === 'exams'
+                          ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      📝 Đề Giữa Kỳ
+                    </button>
+                    <button
+                      onClick={() => setCategoryFilter('textbook')}
+                      className={`flex-1 py-1.5 rounded-lg transition text-center cursor-pointer ${
+                        categoryFilter === 'textbook'
+                          ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-2xs'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      📘 Giáo Trình
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setCategoryFilter('textbook')}
+                      className={`flex-1 py-1.5 rounded-lg transition text-center cursor-pointer ${
+                        categoryFilter === 'textbook'
+                          ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-2xs'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      📘 Giáo Trình
+                    </button>
+                    <button
+                      onClick={() => setCategoryFilter('topics')}
+                      className={`flex-1 py-1.5 rounded-lg transition text-center cursor-pointer ${
+                        categoryFilter === 'topics'
+                          ? 'bg-white dark:bg-slate-900 text-purple-600 dark:text-purple-400 shadow-2xs'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      🧪 Chuyên Đề
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="flex flex-col space-y-1.5">
-              {topics.map((topic) => {
+
+            {/* Vertical List of Contextual Topic Cards */}
+            <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
+              {filteredTopics.map((topic) => {
                 const isSelected = selectedSource === topic.id;
+
                 return (
                   <button
                     key={topic.id}
                     onClick={() => {
                       onSelectSource(topic.id);
+                      setIsDrawerOpen(false);
                     }}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-left transition cursor-pointer ${
+                    className={`w-full text-left p-3.5 rounded-2xl border transition-all flex items-start justify-between gap-3 cursor-pointer group ${
                       isSelected
-                        ? 'bg-blue-600 text-white border-blue-600 font-bold shadow-xs'
-                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 text-slate-800 dark:text-slate-100'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/70 border-emerald-500 text-slate-900 dark:text-slate-100 shadow-xs'
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                     }`}
                   >
-                    <div className="flex items-center space-x-3">
-                      <div className={`p-2 rounded-lg ${isSelected ? 'bg-white/20' : 'bg-slate-100 dark:bg-slate-800'}`}>
-                        {getIcon(topic.id)}
+                    <div className="flex items-start space-x-3 min-w-0">
+                      <div
+                        className={`p-2 rounded-xl shrink-0 mt-0.5 ${
+                          isSelected
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                        }`}
+                      >
+                        {getIcon(topic.id, 'w-4 h-4')}
                       </div>
-                      <div>
-                        <div className="text-xs font-bold flex items-center gap-1.5">
-                          <span>{topic.title}</span>
-                          {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-white fill-white/20" />}
+
+                      <div className="min-w-0 space-y-0.5">
+                        <div className="text-xs font-bold truncate flex items-center gap-1.5">
+                          <span>{getTopicTitle(topic)}</span>
+                          {isSelected && (
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                          )}
                         </div>
-                        <p className={`text-[11px] mt-0.5 line-clamp-1 ${isSelected ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'}`}>
-                          {topic.description}
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                          {getTopicDescription(topic)}
                         </p>
                       </div>
                     </div>
 
-                    <div className="shrink-0 text-right ml-2">
-                      <span className={`text-[11px] font-bold px-2 py-1 rounded-md ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
-                      }`}>
-                        {activeTab === 'quiz' ? `${topic.questionCount} câu` : `${topic.flashcardCount} thẻ`}
-                      </span>
+                    <div className="shrink-0 flex items-center space-x-1 mt-1">
+                      {getItemCountBadge(topic, isSelected)}
+                      <ChevronRight className="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-emerald-500 transition" />
                     </div>
                   </button>
                 );
               })}
             </div>
-          </div>
-        )}
 
-        {/* Selected Source Active Banner */}
-        {selectedSource !== 'all' && (
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 bg-slate-50/80 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-800 dark:text-slate-100">Đang tập trung nguồn:</span>
-              <span className="font-semibold text-blue-700 dark:text-blue-400">{selectedTopicObj.title}</span>
-              <span className="hidden sm:inline text-slate-400 dark:text-slate-500">— {selectedTopicObj.description}</span>
+            {/* Drawer Footer */}
+            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 text-center">
+              <button
+                onClick={() => {
+                  onSelectSource('all');
+                  setIsDrawerOpen(false);
+                }}
+                className="w-full py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition cursor-pointer"
+              >
+                {activeTab === 'flashcards' ? 'Hiển Thị Tất Cả Nguồn Flashcards' : 'Hiển Thị Tất Cả Nguồn Đề Thi'}
+              </button>
             </div>
-            <button
-              onClick={() => onSelectSource('all')}
-              className="text-[11px] font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 underline shrink-0 ml-2 cursor-pointer"
-            >
-              Hiện tất cả nguồn ✕
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+          </aside>
+        </div>
+      )}
+    </>
   );
 };

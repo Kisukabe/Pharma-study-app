@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { SourceSelectorBar } from './components/SourceSelectorBar';
+import { StudyMaterialView } from './components/StudyMaterialView';
 import { FlashcardView } from './components/FlashcardView';
 import { QuizView } from './components/QuizView';
 import { DictionaryView } from './components/DictionaryView';
@@ -16,7 +17,7 @@ const STORAGE_KEY = 'duoc_lieu_user_progress_v1';
 const THEME_KEY = 'duoc_lieu_theme_mode_v1';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats'>('flashcards');
+  const [activeTab, setActiveTab] = useState<'materials' | 'flashcards' | 'quiz' | 'dictionary' | 'ai' | 'stats'>('materials');
   const [selectedSource, setSelectedSource] = useState<string>('all');
 
   // Theme state: 'light' | 'dark' | 'system'
@@ -190,16 +191,32 @@ export default function App() {
         setThemeMode={setThemeMode}
       />
 
-      {/* Global Source / Topic Selector Bar */}
-      <SourceSelectorBar
-        topics={TOPICS}
-        selectedSource={selectedSource}
-        onSelectSource={setSelectedSource}
-        activeTab={activeTab}
-      />
+      {/* Global Source / Topic Selector Bar (Ẩn khi ở Tab Giáo Trình) */}
+      {activeTab !== 'materials' && (
+        <SourceSelectorBar
+          topics={TOPICS}
+          selectedSource={selectedSource}
+          onSelectSource={setSelectedSource}
+          activeTab={activeTab}
+        />
+      )}
 
       {/* Main Container */}
       <main className="flex-1 pb-12">
+        {activeTab === 'materials' && (
+          <StudyMaterialView
+            selectedSource={selectedSource}
+            onNavigateToFlashcards={(topicId) => {
+              setSelectedSource(topicId || 'daicuong');
+              setActiveTab('flashcards');
+            }}
+            onNavigateToQuiz={(topicId) => {
+              setSelectedSource(topicId || 'daicuong');
+              setActiveTab('quiz');
+            }}
+          />
+        )}
+
         {activeTab === 'flashcards' && (
           <FlashcardView
             flashcards={FLASHCARDS}

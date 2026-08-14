@@ -16,7 +16,8 @@ import {
   Zap,
   FileText,
   Layers,
-  Timer
+  Timer,
+  Shuffle
 } from 'lucide-react';
 
 interface QuizViewProps {
@@ -101,7 +102,8 @@ export const QuizView: React.FC<QuizViewProps> = ({
       return;
     }
 
-    let prepared = [...pool];
+    // Shuffle (randomize) question pool automatically every time a quiz starts
+    let prepared = [...pool].sort(() => Math.random() - 0.5);
     
     // Limit questions count according to selection
     if (selectedQuestionCount > 0 && prepared.length > selectedQuestionCount) {
@@ -337,6 +339,10 @@ export const QuizView: React.FC<QuizViewProps> = ({
                   </button>
                 ))}
               </div>
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold pt-1 flex items-center gap-1">
+                <Shuffle className="w-3.5 h-3.5" />
+                Hệ thống tự động tráo ngẫu nhiên bộ câu hỏi mới mỗi lần làm bài
+              </p>
             </div>
           </div>
 

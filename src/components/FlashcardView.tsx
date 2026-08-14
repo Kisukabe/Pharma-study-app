@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flashcard, Topic } from '../types';
 import { 
-  Volume2, 
   RotateCw, 
   CheckCircle, 
   XCircle, 
@@ -39,7 +38,7 @@ export const FlashcardView: React.FC<FlashcardViewProps> = ({
 
   // Base cards filtered by selectedSource
   const sourceCards = React.useMemo(() => {
-    if (['all', 'daicuong', 'midterm', 'd2022', 'deso2', 'deso3'].includes(selectedSource)) {
+    if (selectedSource === 'all') {
       return flashcards;
     }
     return flashcards.filter((c) => c.topic === selectedSource);
@@ -82,16 +81,6 @@ export const FlashcardView: React.FC<FlashcardViewProps> = ({
     const shuffled = [...cardsList].sort(() => Math.random() - 0.5);
     setCardsList(shuffled);
     setCurrentIndex(0);
-  };
-
-  const speakText = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'vi-VN';
-      utterance.rate = 0.95;
-      window.speechSynthesis.speak(utterance);
-    }
   };
 
   // Keyboard navigation
@@ -189,13 +178,6 @@ export const FlashcardView: React.FC<FlashcardViewProps> = ({
                 title="Xáo trộn thẻ"
               >
                 <Shuffle className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => speakText(isFlipped ? currentCard.back : currentCard.front)}
-                className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 transition shadow-2xs cursor-pointer"
-                title="Đọc nội dung"
-              >
-                <Volume2 className="w-4 h-4" />
               </button>
             </div>
           </div>

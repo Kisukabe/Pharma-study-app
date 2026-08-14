@@ -50,9 +50,50 @@ export interface QuizResult {
   answers: { [questionId: number]: number };
 }
 
+export interface QuickReviewItem {
+  question: string;
+  answer: string;
+  importantTag?: string;
+}
+
+export interface ComparisonTable {
+  title: string;
+  headers: string[];
+  rows: string[][];
+  note?: string;
+}
+
+export interface StudySection {
+  id: string;
+  title: string;
+  content: string[];
+  subSections?: {
+    title: string;
+    items: string[];
+    important?: boolean;
+  }[];
+  notes?: string[];
+}
+
+export interface StudyChapter {
+  id: string;
+  chapterNumber: number;
+  title: string;
+  subtitle: string;
+  iconName: string;
+  pageRange: string;
+  overview: string;
+  keyPoints: string[];
+  sections: StudySection[];
+  comparisons?: ComparisonTable[];
+  quickReview: QuickReviewItem[];
+  relatedTopicId: string;
+}
+
 export interface UserProgress {
   masteredFlashcardIds: string[];
   needReviewFlashcardIds: string[];
   quizHistory: QuizResult[];
   bookmarkedQuestions: number[];
+  completedChapterIds?: string[];
 }
