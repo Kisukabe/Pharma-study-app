@@ -13,7 +13,9 @@
     "start": "node dist/server.cjs",
     "start:backend": "node dist/server-backend.cjs",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "docker:push": "bash scripts/docker-push-backend.sh",
+    "docker:push:version": "bash scripts/docker-push-backend.sh"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

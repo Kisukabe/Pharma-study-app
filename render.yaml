@@ -1,11 +1,22 @@
 services:
   - type: web
     name: pharma-study-backend
-    runtime: node
+    # ============================================================
+    # DOCKER IMAGE RUNTIME: Kéo pre-built image từ GitHub Container
+    # Registry (GHCR) thay vì build từ source trên Render.
+    # Lợi ích:
+    #   - Deploy trong < 30 giây (không cần npm install / build)
+    #   - Render Free không tốn RAM khi build (tránh OOM crash)
+    #   - Rollback tức thì về bất kỳ SHA nào
+    # ============================================================
+    runtime: docker
+    image:
+      url: ghcr.io/kisukabe/pharma-backend:latest
+      # Thêm credentials nếu GHCR package ở chế độ Private:
+      # credentials:
+      #   fromRegistryCredentialId: ghcr-credentials
     plan: free
-    region: singapore # hoặc oregon, frankfurt
-    buildCommand: npm install && npm run build:backend
-    startCommand: npm run start:backend
+    region: singapore
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
@@ -13,6 +24,6 @@ services:
       - key: PORT
         value: 10000
       - key: GEMINI_API_KEY
-        sync: false # Render sẽ nhắc bạn nhập API Key khi tạo
+        sync: false
       - key: ALLOWED_ORIGINS
         value: "*"
