@@ -31,18 +31,13 @@ if ! docker info &>/dev/null; then
 fi
 
 # Kiểm tra đăng nhập GHCR
-echo "🔑 Kiểm tra đăng nhập ghcr.io..."
-if ! docker pull "ghcr.io/${GITHUB_USERNAME}/pharma-backend:latest" &>/dev/null; then
-  echo "   Chưa đăng nhập GHCR. Đang yêu cầu đăng nhập..."
-  echo ""
-  echo "   Hướng dẫn tạo GitHub Personal Access Token (PAT):"
-  echo "   1. Truy cập: https://github.com/settings/tokens"
-  echo "   2. Bấm 'Generate new token (classic)'"
-  echo "   3. Cấp quyền: write:packages, read:packages"
-  echo "   4. Copy token và dán vào ô mật khẩu bên dưới"
-  echo ""
-  echo "${GITHUB_USERNAME}" | docker login ghcr.io -u "${GITHUB_USERNAME}" --password-stdin || \
-    docker login ghcr.io -u "${GITHUB_USERNAME}"
+echo "🔑 Đang kiểm tra xác thực ghcr.io..."
+if ! grep -q "ghcr.io" ~/.docker/config.json 2>/dev/null; then
+  echo "   Chưa tìm thấy thông tin đăng nhập GHCR trong ~/.docker/config.json."
+  echo "   Vui lòng nhập Personal Access Token (PAT) để đăng nhập:"
+  docker login ghcr.io -u "${GITHUB_USERNAME}"
+else
+  echo "✅ Đã đăng nhập GHCR (ghcr.io) thành công."
 fi
 
 # --- BƯỚC 1: Build Docker Image ---
